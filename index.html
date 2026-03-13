@@ -1,0 +1,1185 @@
+<!doctype html>
+<html lang="en-IE">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark light" />
+    <meta
+      name="description"
+      content="A high-end personal branding landing page for a Dublin-based Cordon Bleu Chef and 3D Tech Entrepreneur."
+    />
+    <title>Dublin | Chef × 3D Tech Entrepreneur</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,200..900&family=Inter:wght@300..800&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        /* Ultra-minimal canvas */
+        --bg: #fdfcfb;
+        --paper: #ffffff;
+        --ink: #1a1a1a;
+        --muted: rgba(26, 26, 26, 0.68);
+        --line: rgba(26, 26, 26, 0.14);
+        --line2: rgba(26, 26, 26, 0.08);
+        --shadow: none;
+
+        /* Restrained accent (optional) */
+        --accent: #2f8f63;
+
+        --radius-xl: 26px;
+        --radius-lg: 18px;
+        --radius-md: 14px;
+
+        --maxw: 1120px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        margin: 0;
+        color: var(--ink);
+        background: var(--bg);
+        font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+        line-height: 1.45;
+        letter-spacing: -0.01em;
+        overflow-x: hidden;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: none;
+      }
+      img {
+        max-width: 100%;
+        display: block;
+      }
+
+      .wrap {
+        max-width: var(--maxw);
+        margin: 0 auto;
+        padding: 28px 20px 80px;
+      }
+
+      /* Top bar */
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        padding: 14px 0;
+        backdrop-filter: blur(10px);
+        background: rgba(253, 252, 251, 0.78);
+        border-bottom: 1px solid var(--line2);
+      }
+
+      .nav {
+        max-width: var(--maxw);
+        margin: 0 auto;
+        padding: 0 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        min-width: 220px;
+      }
+      .mark {
+        width: 40px;
+        height: 40px;
+        border-radius: 12px;
+        border: 1px solid var(--line);
+        position: relative;
+        overflow: hidden;
+        background: var(--paper);
+      }
+      .mark-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: saturate(1.05) contrast(1.03);
+      }
+      .mark::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.18), transparent 58%);
+        pointer-events: none;
+      }
+
+      .brand .name {
+        display: grid;
+        gap: 2px;
+      }
+      .brand strong {
+        font-weight: 650;
+        letter-spacing: -0.02em;
+        font-size: 14px;
+      }
+      .brand span {
+        font-size: 12.5px;
+        color: var(--muted);
+      }
+
+      nav .links {
+        display: flex;
+        gap: 14px;
+        align-items: center;
+        justify-content: flex-end;
+        flex-wrap: wrap;
+      }
+
+      .pill {
+        font-size: 13px;
+        color: var(--muted);
+        padding: 10px 12px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: transparent;
+        transition: transform 160ms ease, background 160ms ease, border-color 160ms ease;
+      }
+      .pill:hover {
+        color: var(--ink);
+        border-color: rgba(9, 12, 16, 0.18);
+        background: rgba(255, 255, 255, 0.55);
+        transform: translateY(-1px);
+      }
+      .pill.primary {
+        color: var(--ink);
+        border-color: rgba(47, 143, 99, 0.38);
+        background: rgba(47, 143, 99, 0.08);
+      }
+
+      /* Hero */
+      main {
+        position: relative;
+        z-index: 1;
+      }
+
+      .hero {
+        padding: 62px 0 22px;
+        display: grid;
+        grid-template-columns: 0.95fr 1.05fr;
+        gap: 18px;
+        align-items: stretch;
+      }
+
+      .hero h1 {
+        font-family: Fraunces, ui-serif, Georgia, serif;
+        font-weight: 600;
+        font-size: clamp(42px, 4.8vw, 72px);
+        line-height: 1.05;
+        margin: 0 0 12px;
+        letter-spacing: -0.03em;
+      }
+
+      . p.lede {
+        margin: 0 0 16px;
+        color: var(--muted);
+        font-size: 16px;
+        max-width: 62ch;
+      }
+      .manifesto {
+        margin: 0 0 14px;
+        color: rgba(26, 26, 26, 0.78);
+        font-size: 17px;
+        line-height: 1.65;
+        max-width: 62ch;
+      }
+
+      .meta-row {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin: 18px 0 18px;
+      }
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 9px 12px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: transparent;
+        color: rgba(26, 26, 26, 0.78);
+        font-size: 13px;
+      }
+      .dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--accent);
+        box-shadow: none;
+      }
+      .dot.blue {
+        background: rgba(9, 12, 16, 0.45);
+        box-shadow: none;
+      }
+      .dot.gold {
+        background: rgba(47, 143, 99, 0.55);
+        box-shadow: none;
+      }
+
+      .cta-row {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        align-items: center;
+        margin-top: 10px;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 12px 14px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: transparent;
+        color: rgba(26, 26, 26, 0.88);
+        font-size: 14px;
+        transition: transform 160ms ease, background 160ms ease, border-color 160ms ease;
+      }
+      .btn:hover {
+        transform: translateY(-1px);
+        border-color: rgba(9, 12, 16, 0.18);
+        background: rgba(255, 255, 255, 0.65);
+      }
+      .btn.primary {
+        border-color: rgba(47, 143, 99, 0.40);
+        background: rgba(47, 143, 99, 0.10);
+      }
+      .btn .arrow {
+        opacity: 0.8;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      }
+
+      .side-card {
+        border-radius: var(--radius-xl);
+        border: 1px solid var(--line);
+        background: var(--paper);
+        box-shadow: none;
+        padding: 18px;
+        display: grid;
+        align-content: start;
+        gap: 12px;
+        position: relative;
+        overflow: hidden;
+      }
+      .side-card::before {
+        content: "";
+        position: absolute;
+        inset: -2px;
+        background: transparent;
+        opacity: 0;
+        pointer-events: none;
+      }
+      .side-card > * {
+        position: relative;
+        z-index: 1;
+      }
+
+      .side-top {
+        display: grid;
+        gap: 10px;
+      }
+      .side-top h2 {
+        margin: 0;
+        font-size: 14px;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.74);
+      }
+      .side-top p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 13.5px;
+      }
+
+      .mini-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+
+      /* Gallery hero frame */
+      .gallery-frame {
+        border-radius: 22px;
+        border: 1px solid rgba(26, 26, 26, 0.18);
+        background: var(--paper);
+        overflow: hidden;
+        box-shadow: 0 18px 44px rgba(26, 26, 26, 0.10);
+      }
+      .gallery-media {
+        position: relative;
+        aspect-ratio: 4 / 5;
+        background: rgba(9, 12, 16, 0.04);
+      }
+      .gallery-media img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: saturate(1.03) contrast(1.04);
+      }
+      .gallery-media::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: transparent;
+        pointer-events: none;
+      }
+      .gallery-caption {
+        padding: 12px 12px 14px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        border-top: 1px solid var(--line2);
+        background: transparent;
+      }
+      .gallery-caption b {
+        font-size: 13px;
+        letter-spacing: -0.01em;
+      }
+      .gallery-caption span {
+        font-size: 12px;
+        color: rgba(9, 12, 16, 0.55);
+      }
+      .mini {
+        border-radius: 16px;
+        border: 1px solid var(--line);
+        background: transparent;
+        padding: 12px;
+        display: grid;
+        gap: 4px;
+      }
+      .mini b {
+        font-size: 12.5px;
+        letter-spacing: -0.01em;
+      }
+      .mini span {
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      /* Sections */
+      section {
+        margin-top: 46px;
+        padding-top: 38px;
+        border-top: 1px solid var(--line2);
+      }
+
+      /* Convergence */
+      .convergence {
+        display: grid;
+        grid-template-columns: 1.05fr 0.95fr;
+        gap: 14px;
+        align-items: stretch;
+      }
+      .convergence .gallery-media {
+        aspect-ratio: 16 / 10;
+      }
+      @media (max-width: 980px) {
+        .convergence {
+          grid-template-columns: 1fr;
+        }
+        .convergence .gallery-media {
+          aspect-ratio: 16 / 10;
+        }
+      }
+
+      .sec-head {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 18px;
+        flex-wrap: wrap;
+        margin-bottom: 14px;
+      }
+      .sec-head h2 {
+        font-family: Fraunces, ui-serif, Georgia, serif;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+        margin: 0;
+        font-size: 26px;
+      }
+      .sec-head p {
+        margin: 0;
+        color: var(--muted);
+        max-width: 70ch;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 14px;
+      }
+
+      .card {
+        grid-column: span 4;
+        border-radius: var(--radius-xl);
+        border: 1px solid var(--line);
+        background: var(--paper);
+        box-shadow: none;
+        overflow: hidden;
+        transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+        min-height: 278px;
+        display: grid;
+        grid-template-rows: auto 1fr;
+      }
+      .card:hover {
+        transform: translateY(-2px);
+        border-color: rgba(9, 12, 16, 0.18);
+        background: var(--paper);
+      }
+
+      .thumb {
+        position: relative;
+        background: rgba(9, 12, 16, 0.04);
+        aspect-ratio: 4 / 3;
+        padding: 12px;
+      }
+      .thumb.alt {
+        background: rgba(9, 12, 16, 0.04);
+      }
+      .thumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 4px;
+        display: block;
+      }
+      /* Force consistent gallery tiles in grid sections */
+      #culinary .thumb,
+      #3d .thumb {
+        aspect-ratio: 4 / 3;
+      }
+      #culinary .thumb img,
+      #3d .thumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .thumb .ph {
+        position: absolute;
+        inset: 14px;
+        border-radius: 18px;
+        border: 1px dashed rgba(9, 12, 16, 0.22);
+        background: rgba(255, 255, 255, 0.65);
+        display: grid;
+        place-content: center;
+        text-align: center;
+        padding: 10px;
+        color: rgba(9, 12, 16, 0.74);
+        font-size: 12.5px;
+      }
+
+      .card .body {
+        padding: 14px 14px 16px;
+        display: grid;
+        gap: 8px;
+        align-content: start;
+      }
+      .kicker {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: rgba(9, 12, 16, 0.62);
+        font-size: 12px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+      .kicker i {
+        width: 7px;
+        height: 7px;
+        border-radius: 99px;
+        display: inline-block;
+        background: var(--accent);
+        box-shadow: none;
+      }
+      .kicker i.gold {
+        background: rgba(9, 12, 16, 0.45);
+        box-shadow: none;
+      }
+      .card h3 {
+        margin: 0;
+        font-size: 16px;
+        letter-spacing: -0.02em;
+      }
+      .card p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 13.5px;
+      }
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 2px;
+      }
+      .chip {
+        font-size: 12px;
+        color: rgba(9, 12, 16, 0.66);
+        background: transparent;
+        border: 1px solid var(--line);
+        padding: 7px 10px;
+        border-radius: 999px;
+      }
+
+      /* About / services */
+      .two {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+        align-items: stretch;
+      }
+      .panel {
+        border-radius: var(--radius-xl);
+        border: 1px solid var(--line);
+        background: var(--paper);
+        padding: 16px;
+        box-shadow: none;
+      }
+      .panel h3 {
+        margin: 0 0 8px;
+        font-size: 16px;
+        letter-spacing: -0.02em;
+      }
+      .panel p {
+        margin: 0 0 10px;
+        color: var(--muted);
+      }
+
+      .panel.lede-panel p {
+        font-size: 15.5px;
+        line-height: 1.65;
+        max-width: 70ch;
+      }
+      .list {
+        display: grid;
+        gap: 10px;
+        margin: 0;
+        padding-left: 18px;
+        color: rgba(9, 12, 16, 0.78);
+      }
+      .list li {
+        color: rgba(9, 12, 16, 0.72);
+      }
+      .list b {
+        color: rgba(9, 12, 16, 0.92);
+        font-weight: 650;
+      }
+
+      /* Contact */
+      .contact {
+        display: grid;
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: 14px;
+        align-items: start;
+      }
+      .contact .panel {
+        background: var(--paper);
+      }
+      .fields {
+        display: grid;
+        gap: 10px;
+        margin-top: 10px;
+      }
+      .field {
+        display: grid;
+        gap: 6px;
+      }
+      label {
+        font-size: 12.5px;
+        color: rgba(9, 12, 16, 0.62);
+      }
+      input,
+      textarea {
+        width: 100%;
+        border-radius: 14px;
+        border: 1px solid var(--line);
+        background: rgba(9, 12, 16, 0.02);
+        padding: 11px 12px;
+        color: rgba(9, 12, 16, 0.92);
+        outline: none;
+        font: inherit;
+        transition: border-color 160ms ease, background 160ms ease;
+      }
+      textarea {
+        min-height: 120px;
+        resize: vertical;
+      }
+      input:focus,
+      textarea:focus {
+        border-color: rgba(47, 143, 99, 0.55);
+        background: rgba(47, 143, 99, 0.06);
+      }
+
+      .fineprint {
+        margin: 10px 0 0;
+        font-size: 12.5px;
+        color: rgba(9, 12, 16, 0.55);
+      }
+
+      footer {
+        margin-top: 34px;
+        padding-top: 18px;
+        border-top: 1px solid var(--line2);
+        color: rgba(9, 12, 16, 0.55);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      footer small {
+        font-size: 12.5px;
+      }
+
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border-width: 0;
+      }
+
+      /* Responsive */
+      @media (max-width: 980px) {
+        .hero {
+          grid-template-columns: 1fr;
+        }
+        .side-card {
+          min-height: 260px;
+        }
+        .gallery-media {
+          aspect-ratio: 16 / 10;
+        }
+        .card {
+          grid-column: span 6;
+        }
+        .contact {
+          grid-template-columns: 1fr;
+        }
+      }
+      @media (max-width: 640px) {
+        .brand {
+          min-width: auto;
+        }
+        nav .links {
+          gap: 10px;
+        }
+        .pill {
+          padding: 9px 10px;
+        }
+        .card {
+          grid-column: span 12;
+        }
+        .two {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* Reduced motion */
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          scroll-behavior: auto !important;
+          animation-duration: 0.001ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.001ms !important;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="nav" role="navigation" aria-label="Primary">
+        <a class="brand" href="#top">
+          <span class="mark" aria-hidden="true">
+            <img class="mark-img" src="IMG_9192.jpg" alt="" loading="eager" decoding="async" />
+          </span>
+          <span class="name">
+            <strong>Bob Wu</strong>
+            <span>Dublin • Cordon Bleu Chef × 3D Tech Entrepreneur</span>
+          </span>
+        </a>
+
+        <nav class="links" aria-label="Jump links">
+          <a class="pill" href="#culinary">Culinary</a>
+          <a class="pill" href="#3d">3D Projects</a>
+          <a class="pill" href="#about">About</a>
+          <a class="pill primary" href="#contact">Enquire</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="top">
+      <div class="wrap">
+        <div class="hero" aria-label="Intro">
+          <div>
+            <h1>Precision on the pass</h1>
+            <p class="manifesto">
+              Precision is the universal language I speak—whether it is the micron-level calibration of a 3D
+              printer or the obsessive decoration of a Cordon Bleu tartlet.
+            </p>
+            <p class="lede">Dublin-based. Available for select culinary and product briefs.</p>
+
+            <div class="meta-row" aria-label="Highlights">
+              <span class="tag"><span class="dot" aria-hidden="true"></span> Dublin-based • available for select projects</span>
+              <span class="tag"><span class="dot gold" aria-hidden="true"></span> Private dining • brand collaborations</span>
+              <span class="tag"><span class="dot blue" aria-hidden="true"></span> 3D prototyping • product storytelling</span>
+            </div>
+
+            <div class="cta-row">
+              <a class="btn primary" href="#contact" aria-label="Jump to enquiry section">
+                Start a conversation <span class="arrow" aria-hidden="true">→</span>
+              </a>
+              <a class="btn" href="#culinary">
+                View culinary work <span class="arrow" aria-hidden="true">↘</span>
+              </a>
+              <a class="btn" href="#digital-craftsmanship">
+                View digital craft <span class="arrow" aria-hidden="true">↘</span>
+              </a>
+            </div>
+          </div>
+
+          <aside class="side-card" aria-label="Hero gallery">
+            <div class="gallery-frame">
+              <div class="gallery-media">
+                <img
+                  src="IMG_9192.jpg"
+                  alt="Chef precision portrait (placeholder)"
+                  loading="eager"
+                  decoding="async"
+                />
+              </div>
+              <div class="gallery-caption">
+                <b>Chef’s precision</b>
+                <span>Hero image placeholder</span>
+              </div>
+            </div>
+
+            <div class="mini-grid" aria-label="At-a-glance">
+              <div class="mini">
+                <b>Culinary</b>
+                <span>Tasting menus, pastry, product development</span>
+              </div>
+              <div class="mini">
+                <b>3D & Tech</b>
+                <span>Concept-to-prototype, iterative design, demos</span>
+              </div>
+              <div class="mini">
+                <b>Based in</b>
+                <span>Dublin • available across Ireland</span>
+              </div>
+              <div class="mini">
+                <b>Best fit</b>
+                <span>High-touch, quality-led briefs</span>
+              </div>
+            </div>
+          </aside>
+        </div>
+
+        <section id="convergence" aria-labelledby="convergence-title">
+          <div class="sec-head">
+            <div>
+              <h2 id="convergence-title">The Convergence</h2>
+            </div>
+          </div>
+
+          <div class="convergence" aria-label="Culinary and 3D convergence feature">
+            <div class="panel">
+              <div class="gallery-frame">
+                <div class="gallery-media">
+                  <img
+                    src="3d_master_black.jpg"
+                    alt="3D printed topological structure (placeholder)"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <div class="gallery-caption">
+                  <b>3D printing expertise</b>
+                  <span>
+                    Engineering the impossible: Exploring complex topological structures through additive manufacturing.
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel">
+              <h3>Where craft meets computation</h3>
+              <p>
+                Engineering-led prototyping with a chef’s obsession for finish — turning complex geometry into objects
+                you can hold, test, and refine.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section id="culinary" aria-labelledby="culinary-title">
+          <div class="sec-head">
+            <div>
+              <h2 id="culinary-title">Culinary Craftsmanship</h2>
+              <p>A journey from the kitchens of Le Cordon Bleu to the art of precision pastry.</p>
+            </div>
+          </div>
+
+          <div class="grid" role="list" aria-label="Culinary portfolio items">
+            <article class="card" role="listitem">
+              <div class="thumb">
+                <img
+                  src="chef_work_metallic.jpg"
+                  alt="Culinary work: metallic pastry detail"
+                  loading="lazy"
+                  decoding="async"
+                  style="aspect-ratio: 4/3; object-fit: cover;"
+                />
+              </div>
+              <div class="body">
+                <div class="kicker"><i aria-hidden="true"></i> Tasting menu</div>
+                <h3>[Dish / Course Title]</h3>
+                <p>
+                  A short story about flavour and intent — seasonal, balanced, and quietly confident.
+                </p>
+                <div class="chips" aria-label="Tags">
+                  <span class="chip">Seasonal</span>
+                  <span class="chip">Modern Irish</span>
+                  <span class="chip">Fine plating</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="card" role="listitem">
+              <div class="thumb alt">
+                <img
+                  src="chef_work_1.jpg"
+                  alt="Culinary work: plated course"
+                  loading="lazy"
+                  decoding="async"
+                  style="aspect-ratio: 4/3; object-fit: cover;"
+                />
+              </div>
+              <div class="body">
+                <div class="kicker"><i class="gold" aria-hidden="true"></i> Pâtisserie</div>
+                <h3>[Dessert / Pastry Title]</h3>
+                <p>
+                  Precision textures, clean sweetness, and a finish that feels like a proper treat.
+                </p>
+                <div class="chips" aria-label="Tags">
+                  <span class="chip">Chocolate</span>
+                  <span class="chip">Citrus</span>
+                  <span class="chip">Textural</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="card" role="listitem">
+              <div class="thumb">
+                <img
+                  src="chef_work_2.jpg"
+                  alt="Culinary work: pastry detail"
+                  loading="lazy"
+                  decoding="async"
+                  style="aspect-ratio: 4/3; object-fit: cover;"
+                />
+              </div>
+              <div class="body">
+                <div class="kicker"><i aria-hidden="true"></i> Experience</div>
+                <h3>[Event / Collaboration]</h3>
+                <p>
+                  A calm, polished service — built around your guests, your brand, and the moment you’re after.
+                </p>
+                <div class="chips" aria-label="Tags">
+                  <span class="chip">Private dining</span>
+                  <span class="chip">Brand collab</span>
+                  <span class="chip">Dublin</span>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+        <section id="digital-craftsmanship" aria-labelledby="digital-title">
+          <div class="sec-head">
+            <div>
+              <h2 id="digital-title">Digital Craftsmanship</h2>
+              <p>
+                Culinary precision and additive manufacturing share the same discipline: tolerance, iteration, and
+                finish. I use 3D printing to explore complex forms, prototype quickly, and bring ideas into the real
+                world with the same quiet rigor I bring to the pass.
+              </p>
+            </div>
+          </div>
+
+          <div class="convergence" aria-label="Digital craftsmanship feature">
+            <div class="panel lede-panel">
+              <h3>From mise en place to micron-level control</h3>
+              <p>
+                In the kitchen, consistency is engineered — temperatures, timings, and repeatable technique. In 3D
+                printing, the same mindset becomes layer height, calibration, and material behavior. The result is
+                work that’s both expressive and testable: complex geometry you can hold, evaluate, and refine.
+              </p>
+            </div>
+
+            <div class="panel">
+              <div class="gallery-frame">
+                <div class="gallery-media">
+                  <img
+                    src="3d_design_hand.jpg"
+                    alt="3D printed topological structure (placeholder)"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <div class="gallery-caption">
+                  <b>Engineering the impossible</b>
+                  <span>Exploring complex topological structures through additive manufacturing.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="3d" aria-labelledby="d3-title">
+          <div class="sec-head">
+            <div>
+              <h2 id="d3-title">3D printed projects</h2>
+              <p>
+                Prototypes, product concepts, and tactile storytelling — designed to be held, tested, and improved.
+                From first sketch to a clean demo, I keep it practical and elegant.
+              </p>
+            </div>
+          </div>
+
+          <div class="grid" role="list" aria-label="3D portfolio items">
+            <article class="card" role="listitem">
+              <div class="thumb alt">
+                <img
+                  src="3d_masterpiece.jpg"
+                  alt="3D print: masterpiece"
+                  loading="lazy"
+                  decoding="async"
+                  style="aspect-ratio: 4/3; object-fit: cover;"
+                />
+              </div>
+              <div class="body">
+                <div class="kicker"><i class="gold" aria-hidden="true"></i> Prototype</div>
+                <h3>[Project Name]</h3>
+                <p>
+                  A clean first pass built fast — optimised for iteration, testing, and proper stakeholder buy-in.
+                </p>
+                <div class="chips" aria-label="Tags">
+                  <span class="chip">Rapid iteration</span>
+                  <span class="chip">Fit & finish</span>
+                  <span class="chip">Demo-ready</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="card" role="listitem">
+              <div class="thumb">
+                <img
+                  src="3d_red_prototype.jpg"
+                  alt="3D print: red prototype"
+                  loading="lazy"
+                  decoding="async"
+                  style="aspect-ratio: 4/3; object-fit: cover;"
+                />
+              </div>
+              <div class="body">
+                <div class="kicker"><i aria-hidden="true"></i> Engineering</div>
+                <h3>[Functional Print]</h3>
+                <p>
+                  Designed for real-world use — tolerances, materials, and constraints considered from day one.
+                </p>
+                <div class="chips" aria-label="Tags">
+                  <span class="chip">Tolerance</span>
+                  <span class="chip">Materials</span>
+                  <span class="chip">Assembly</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="card" role="listitem">
+              <div class="thumb alt">
+                <img
+                  src="3d_tech_printer.jpg"
+                  alt="3D printer and in-progress build"
+                  loading="lazy"
+                  decoding="async"
+                  style="aspect-ratio: 4/3; object-fit: cover;"
+                />
+              </div>
+              <div class="body">
+                <div class="kicker"><i class="gold" aria-hidden="true"></i> Storytelling</div>
+                <h3>[Brand Object / Concept]</h3>
+                <p>
+                  A tactile artefact that makes your idea feel obvious — refined enough to sit on a boardroom table.
+                </p>
+                <div class="chips" aria-label="Tags">
+                  <span class="chip">Premium</span>
+                  <span class="chip">Narrative</span>
+                  <span class="chip">Presentation</span>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section id="about" aria-labelledby="about-title">
+          <div class="sec-head">
+            <div>
+              <h2 id="about-title">About</h2>
+              <p>
+                The through-line is craft — doing the simple things exceptionally well, and bringing a bit of edge
+                when it makes sense. Here’s what I’m set up for.
+              </p>
+            </div>
+          </div>
+
+          <div class="two" role="list" aria-label="About panels">
+            <div class="panel" role="listitem">
+              <h3>Culinary focus</h3>
+              <p>
+                Classic technique with a modern point of view — built for flavour, flow, and a seamless guest
+                experience.
+              </p>
+              <ul class="list">
+                <li><b>Private dining</b> in Dublin and across Ireland (select dates)</li>
+                <li><b>Menu development</b> for restaurants, pop-ups, and hospitality concepts</li>
+                <li><b>Brand collaborations</b> that feel tasteful, not try-hard</li>
+              </ul>
+            </div>
+
+            <div class="panel" role="listitem">
+              <h3>3D & product work</h3>
+              <p>
+                Fast, high-fidelity prototyping to help you test, pitch, and iterate — without losing the details
+                that make it feel premium.
+              </p>
+              <ul class="list">
+                <li><b>Prototype builds</b> for concept validation and investor demos</li>
+                <li><b>Functional parts</b> with tolerance and assembly in mind</li>
+                <li><b>Physical storytelling</b> that turns abstract into obvious</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section id="contact" aria-labelledby="contact-title">
+          <div class="sec-head">
+            <div>
+              <h2 id="contact-title">Enquiries</h2>
+              <p>
+                Send a few details and I’ll come back to you. If it’s a good fit, we’ll make something class — no
+                fuss, just quality.
+              </p>
+            </div>
+          </div>
+
+          <div class="contact">
+            <div class="panel">
+              <h3>Tell me what you’re after</h3>
+              <p class="fineprint">
+                This form is a placeholder (no backend yet). Replace the action with your email service or a form
+                provider when you’re ready.
+              </p>
+
+              <form class="fields" action="#" method="post">
+                <div class="field">
+                  <label for="name">Name</label>
+                  <input id="name" name="name" type="text" placeholder="Your name" autocomplete="name" />
+                </div>
+                <div class="field">
+                  <label for="email">Email</label>
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    placeholder="you@example.com"
+                    autocomplete="email"
+                  />
+                </div>
+                <div class="field">
+                  <label for="type">What do you need?</label>
+                  <input
+                    id="type"
+                    name="type"
+                    type="text"
+                    placeholder="Private dining, brand collab, prototype, product demo…"
+                    autocomplete="off"
+                  />
+                </div>
+                <div class="field">
+                  <label for="msg">Notes</label>
+                  <textarea
+                    id="msg"
+                    name="message"
+                    placeholder="Dates, guest count, dietary needs… or what you're building and what you want to show."
+                  ></textarea>
+                </div>
+                <button class="btn primary" type="submit">
+                  Send enquiry <span class="arrow" aria-hidden="true">→</span>
+                </button>
+              </form>
+            </div>
+
+            <aside class="panel" aria-label="Contact details">
+              <h3>Contact details</h3>
+              <p class="fineprint">
+                Replace these placeholders with your real links.
+              </p>
+              <div class="chips" aria-label="Links">
+                <a class="chip" href="mailto:wavewubo@hotmail.com" aria-label="Email Bob Wu">Email: wavewubo@hotmail.com</a>
+                <a class="chip" href="https://instagram.com/bowu95" aria-label="Bob Wu on Instagram">Instagram: @bowu95</a>
+                <a class="chip" href="#" aria-label="LinkedIn link placeholder">LinkedIn: [profile]</a>
+                <a class="chip" href="#" aria-label="Portfolio link placeholder">Portfolio PDF: [link]</a>
+              </div>
+
+              <p class="fineprint" style="margin-top: 12px;">
+                Dublin time (GMT / Irish Standard Time in summer). Replies typically within 1–2 working days.
+              </p>
+            </aside>
+          </div>
+        </section>
+
+        <footer>
+          <small>© <span id="year">2026</span> Bob Wu. Dublin, Ireland.</small>
+          <small>
+            Built with craft. <span class="sr-only">Decorative separator</span> •
+            <a href="#top" class="pill" style="padding: 7px 10px;">Back to top</a>
+          </small>
+        </footer>
+      </div>
+    </main>
+
+    <script>
+      // Keep year current without editing content annually.
+      const yearEl = document.getElementById("year");
+      if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+    </script>
+  </body>
+</html>
+
