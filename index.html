@@ -16,7 +16,6 @@
       href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,200..900&family=Inter:wght@300..800&display=swap"
       rel="stylesheet"
     />
-
     <style>
       :root {
         /* Ultra-minimal canvas */
@@ -710,7 +709,36 @@
           transition-duration: 0.001ms !important;
         }
       }
-    </style>
+      @media (max-width: 600px) {
+        .nav {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 12px;
+          padding: 10px 0;
+        }
+
+        .nav nav {
+          width: 100%;
+          justify-content: center;
+          gap: 6px !important;
+        }
+
+        .pill {
+          padding: 6px 10px;
+          font-size: 12px;
+          white-space: nowrap;
+        }
+
+        .brand .name {
+          font-size: 14px;
+        }
+        
+        .hero {
+          padding-top: 20px;
+        }
+      }
+   </style>
   </head>
 
   <body>
