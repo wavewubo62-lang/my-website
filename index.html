@@ -740,6 +740,14 @@
           padding-top: 20px;
         }
       }
+      .hero-image img {
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .hero-image img:hover {
+        transform: scale(1.03) translateY(-5px);
+        filter: drop-shadow(0 20px 30px rgba(0,0,0,0.1));
+      }
    </style>
   </head>
 
@@ -1196,7 +1204,10 @@
         </section>
 
         <footer>
-          <small>© <span id="year">2026</span> Bob Wu. Dublin, Ireland.</small>
+          <small>
+            © <span id="year">2026</span> Bob Wu. Dublin, Ireland.
+            <span style="color: rgba(201, 164, 91, 0.85);">Crafted with passion in Dublin</span>
+          </small>
           <small>
             Built with craft. <span class="sr-only">Decorative separator</span> •
             <a href="#top" class="pill" style="padding: 7px 10px;">Back to top</a>
