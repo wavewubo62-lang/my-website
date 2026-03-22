@@ -8,7 +8,7 @@
       name="description"
       content="A high-end personal branding landing page for a Dublin-based Cordon Bleu Chef and 3D Tech Entrepreneur."
     />
-    <title>Dublin | Chef × 3D Tech Entrepreneur</title>
+    <title>Bob Wu | Chef × 3D Tech Entrepreneur — Dublin</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -17,54 +17,63 @@
       rel="stylesheet"
     />
     <style>
+      /* ========================================
+         CSS VARIABLES & THEME
+         ======================================== */
       :root {
-        /* Ultra-minimal canvas */
         --bg: #fdfcfb;
         --paper: #ffffff;
         --ink: #1a1a1a;
         --muted: rgba(26, 26, 26, 0.68);
-        --line: rgba(26, 26, 26, 0.14);
-        --line2: rgba(26, 26, 26, 0.08);
-        --shadow: none;
-
-        /* Restrained accent (optional) */
+        --line: rgba(26, 26, 26, 0.12);
+        --line2: rgba(26, 26, 26, 0.06);
         --accent: #2f8f63;
-
-        --radius-xl: 32px;
-        --radius-lg: 24px;
-        --radius-md: 20px;
-
+        --accent-light: rgba(47, 143, 99, 0.08);
+        --accent-mid: rgba(47, 143, 99, 0.18);
+        --accent-glow: rgba(47, 143, 99, 0.35);
+        --radius-xl: 28px;
+        --radius-lg: 22px;
+        --radius-md: 16px;
         --maxw: 1120px;
+        --header-bg: rgba(253, 252, 251, 0.82);
+        --card-hover-shadow: 0 24px 48px rgba(26, 26, 26, 0.08), 0 8px 16px rgba(26, 26, 26, 0.04);
+        --transition-smooth: cubic-bezier(0.22, 1, 0.36, 1);
       }
 
-      * {
-        box-sizing: border-box;
+      /* Dark mode */
+      [data-theme="dark"] {
+        --bg: #0e0e10;
+        --paper: #18181b;
+        --ink: #f0f0f0;
+        --muted: rgba(240, 240, 240, 0.62);
+        --line: rgba(255, 255, 255, 0.10);
+        --line2: rgba(255, 255, 255, 0.05);
+        --accent: #4ade80;
+        --accent-light: rgba(74, 222, 128, 0.08);
+        --accent-mid: rgba(74, 222, 128, 0.15);
+        --accent-glow: rgba(74, 222, 128, 0.25);
+        --header-bg: rgba(14, 14, 16, 0.85);
+        --card-hover-shadow: 0 24px 48px rgba(0, 0, 0, 0.3), 0 8px 16px rgba(0, 0, 0, 0.2);
       }
-      html,
-      body {
-        height: 100%;
-      }
+
+      /* ========================================
+         RESET & BASE
+         ======================================== */
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      html, body { height: 100%; }
       body {
         margin: 0;
         color: var(--ink);
         background: var(--bg);
         font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-        line-height: 1.45;
+        line-height: 1.5;
         letter-spacing: -0.01em;
         overflow-x: hidden;
+        transition: background 0.4s var(--transition-smooth), color 0.4s var(--transition-smooth);
       }
-
-      a {
-        color: inherit;
-        text-decoration: none;
-      }
-      a:hover {
-        text-decoration: none;
-      }
-      img {
-        max-width: 100%;
-        display: block;
-      }
+      a { color: inherit; text-decoration: none; }
+      img { max-width: 100%; display: block; }
 
       .wrap {
         max-width: var(--maxw);
@@ -72,15 +81,43 @@
         padding: 28px 20px 80px;
       }
 
-      /* Top bar */
+      /* ========================================
+         SCROLL ANIMATIONS
+         ======================================== */
+      .reveal {
+        opacity: 0;
+        transform: translateY(32px);
+        transition: opacity 0.7s var(--transition-smooth), transform 0.7s var(--transition-smooth);
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .reveal-delay-1 { transition-delay: 0.1s; }
+      .reveal-delay-2 { transition-delay: 0.2s; }
+      .reveal-delay-3 { transition-delay: 0.3s; }
+
+      /* Stagger children */
+      .stagger-children .reveal:nth-child(1) { transition-delay: 0s; }
+      .stagger-children .reveal:nth-child(2) { transition-delay: 0.08s; }
+      .stagger-children .reveal:nth-child(3) { transition-delay: 0.16s; }
+
+      /* ========================================
+         HEADER
+         ======================================== */
       header {
         position: sticky;
         top: 0;
         z-index: 50;
-        padding: 14px 0;
-        backdrop-filter: blur(10px);
-        background: rgba(253, 252, 251, 0.78);
+        padding: 12px 0;
+        backdrop-filter: blur(16px) saturate(1.4);
+        -webkit-backdrop-filter: blur(16px) saturate(1.4);
+        background: var(--header-bg);
         border-bottom: 1px solid var(--line2);
+        transition: background 0.4s var(--transition-smooth), box-shadow 0.3s ease;
+      }
+      header.scrolled {
+        box-shadow: 0 1px 24px rgba(0, 0, 0, 0.06);
       }
 
       .nav {
@@ -100,13 +137,18 @@
         min-width: 220px;
       }
       .mark {
-        width: 40px;
-        height: 40px;
-        border-radius: var(--radius-md);
-        border: 1px solid var(--line);
+        width: 42px;
+        height: 42px;
+        border-radius: 14px;
+        border: 1.5px solid var(--line);
         position: relative;
         overflow: hidden;
         background: var(--paper);
+        transition: transform 0.3s var(--transition-smooth), border-color 0.3s ease;
+      }
+      .brand:hover .mark {
+        transform: scale(1.06);
+        border-color: var(--accent-glow);
       }
       .mark-img {
         width: 100%;
@@ -118,86 +160,138 @@
         content: "";
         position: absolute;
         inset: 0;
-        background: radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.18), transparent 58%);
+        background: radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.2), transparent 60%);
         pointer-events: none;
       }
 
-      .brand .name {
-        display: grid;
-        gap: 2px;
-      }
+      .brand .name { display: grid; gap: 2px; }
       .brand strong {
         font-weight: 650;
         letter-spacing: -0.02em;
         font-size: 14px;
       }
-      .brand span {
-        font-size: 12.5px;
-        color: var(--muted);
-      }
+      .brand span { font-size: 12.5px; color: var(--muted); }
 
+      .nav-right {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
       nav .links {
         display: flex;
-        gap: 14px;
+        gap: 10px;
         align-items: center;
         justify-content: flex-end;
-        flex-wrap: wrap;
+        flex-wrap: nowrap;
       }
 
       .pill {
         font-size: 13px;
         color: var(--muted);
-        padding: 10px 12px;
+        padding: 8px 14px;
         border-radius: 999px;
         border: 1px solid var(--line);
         background: transparent;
-        transition: transform 160ms ease, background 160ms ease, border-color 160ms ease;
+        transition: all 0.25s var(--transition-smooth);
+        position: relative;
+        overflow: hidden;
+      }
+      .pill::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: var(--accent-light);
+        opacity: 0;
+        transition: opacity 0.25s ease;
+        border-radius: 999px;
       }
       .pill:hover {
         color: var(--ink);
-        border-color: rgba(9, 12, 16, 0.18);
-        background: rgba(255, 255, 255, 0.55);
+        border-color: var(--accent-mid);
         transform: translateY(-1px);
       }
+      .pill:hover::before { opacity: 1; }
       .pill.primary {
         color: var(--ink);
-        border-color: rgba(47, 143, 99, 0.38);
-        background: rgba(47, 143, 99, 0.08);
+        border-color: var(--accent-mid);
+        background: var(--accent-light);
       }
 
-      /* Hero */
-      main {
-        position: relative;
-        z-index: 1;
+      /* Theme toggle */
+      .theme-toggle {
+        width: 38px;
+        height: 38px;
+        border-radius: 12px;
+        border: 1px solid var(--line);
+        background: transparent;
+        cursor: pointer;
+        display: grid;
+        place-content: center;
+        color: var(--muted);
+        transition: all 0.25s var(--transition-smooth);
+        flex-shrink: 0;
       }
+      .theme-toggle:hover {
+        color: var(--ink);
+        border-color: var(--accent-mid);
+        background: var(--accent-light);
+        transform: rotate(15deg);
+      }
+      .theme-toggle svg {
+        width: 18px;
+        height: 18px;
+        transition: transform 0.3s var(--transition-smooth);
+      }
+      [data-theme="dark"] .sun-icon { display: block; }
+      [data-theme="dark"] .moon-icon { display: none; }
+      .sun-icon { display: none; }
+      .moon-icon { display: block; }
+
+      /* ========================================
+         HERO
+         ======================================== */
+      main { position: relative; z-index: 1; }
 
       .hero {
-        padding: 62px 0 22px;
+        padding: 56px 0 22px;
         display: grid;
         grid-template-columns: 0.95fr 1.05fr;
-        gap: 18px;
+        gap: 24px;
         align-items: stretch;
       }
 
       .hero h1 {
         font-family: Fraunces, ui-serif, Georgia, serif;
         font-weight: 600;
-        font-size: clamp(42px, 4.8vw, 72px);
-        line-height: 1.05;
-        margin: 0 0 12px;
+        font-size: clamp(40px, 4.8vw, 68px);
+        line-height: 1.06;
+        margin: 0 0 14px;
         letter-spacing: -0.03em;
+        position: relative;
+      }
+      .hero h1 .accent-word {
+        background: linear-gradient(135deg, var(--accent), #34d399, var(--accent));
+        background-size: 200% 200%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: gradientShift 4s ease infinite;
+      }
+      @keyframes gradientShift {
+        0%, 100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
       }
 
       .hero p.lede {
         margin: 0 0 16px;
         color: var(--muted);
-        font-size: 16px;
+        font-size: 15.5px;
         max-width: 62ch;
       }
       .manifesto {
         margin: 0 0 14px;
-        color: rgba(26, 26, 26, 0.78);
-        font-size: 17px;
+        color: var(--muted);
+        font-size: 16.5px;
         line-height: 1.65;
         max-width: 62ch;
       }
@@ -206,110 +300,101 @@
         display: flex;
         gap: 10px;
         flex-wrap: wrap;
-        margin: 18px 0 18px;
+        margin: 18px 0;
       }
       .tag {
         display: inline-flex;
         align-items: center;
         gap: 8px;
-        padding: 9px 12px;
+        padding: 8px 14px;
         border-radius: 999px;
         border: 1px solid var(--line);
         background: transparent;
-        color: rgba(26, 26, 26, 0.78);
+        color: var(--muted);
         font-size: 13px;
+        transition: all 0.25s var(--transition-smooth);
+      }
+      .tag:hover {
+        border-color: var(--accent-mid);
+        background: var(--accent-light);
       }
       .dot {
         width: 7px;
         height: 7px;
         border-radius: 50%;
         background: var(--accent);
-        box-shadow: none;
       }
-      .dot.blue {
-        background: rgba(9, 12, 16, 0.45);
-        box-shadow: none;
-      }
-      .dot.gold {
-        background: rgba(47, 143, 99, 0.55);
-        box-shadow: none;
-      }
+      .dot.blue { background: rgba(99, 102, 241, 0.65); }
+      .dot.gold { background: rgba(234, 179, 8, 0.65); }
 
       .cta-row {
         display: flex;
         gap: 12px;
         flex-wrap: wrap;
         align-items: center;
-        margin-top: 10px;
+        margin-top: 12px;
       }
       .btn {
         display: inline-flex;
         align-items: center;
         justify-content: center;
         gap: 10px;
-        padding: 12px 14px;
+        padding: 12px 18px;
         border-radius: 999px;
         border: 1px solid var(--line);
         background: transparent;
-        color: rgba(26, 26, 26, 0.88);
+        color: var(--ink);
         font-size: 14px;
-        transition: transform 160ms ease, background 160ms ease, border-color 160ms ease;
+        font-weight: 500;
+        transition: all 0.3s var(--transition-smooth);
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+      }
+      .btn::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: var(--accent-light);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        border-radius: 999px;
       }
       .btn:hover {
-        transform: translateY(-1px);
-        border-color: rgba(9, 12, 16, 0.18);
-        background: rgba(255, 255, 255, 0.65);
+        transform: translateY(-2px);
+        border-color: var(--accent-mid);
+        box-shadow: 0 8px 24px rgba(47, 143, 99, 0.12);
       }
+      .btn:hover::before { opacity: 1; }
+      .btn:active { transform: translateY(0) scale(0.98); }
       .btn.primary {
-        border-color: rgba(47, 143, 99, 0.40);
-        background: rgba(47, 143, 99, 0.10);
+        border-color: var(--accent-glow);
+        background: var(--accent-light);
+        font-weight: 600;
       }
       .btn .arrow {
-        opacity: 0.8;
-        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+        opacity: 0.7;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        transition: transform 0.3s var(--transition-smooth);
       }
+      .btn:hover .arrow { transform: translateX(3px); }
 
+      /* ========================================
+         SIDE CARD (Hero Gallery)
+         ======================================== */
       .side-card {
         border-radius: var(--radius-xl);
         border: 1px solid var(--line);
         background: var(--paper);
-        box-shadow: none;
-        padding: 18px;
+        padding: 16px;
         display: grid;
         align-content: start;
         gap: 12px;
         position: relative;
         overflow: hidden;
+        transition: border-color 0.3s ease;
       }
-      .side-card::before {
-        content: "";
-        position: absolute;
-        inset: -2px;
-        background: transparent;
-        opacity: 0;
-        pointer-events: none;
-      }
-      .side-card > * {
-        position: relative;
-        z-index: 1;
-      }
-
-      .side-top {
-        display: grid;
-        gap: 10px;
-      }
-      .side-top h2 {
-        margin: 0;
-        font-size: 14px;
-        letter-spacing: 0.04em;
-        text-transform: uppercase;
-        color: rgba(255, 255, 255, 0.74);
-      }
-      .side-top p {
-        margin: 0;
-        color: var(--muted);
-        font-size: 13.5px;
-      }
+      .side-card:hover { border-color: var(--accent-mid); }
 
       .mini-grid {
         display: grid;
@@ -317,90 +402,70 @@
         gap: 10px;
       }
 
-      /* Gallery hero frame */
       .gallery-frame {
         border-radius: var(--radius-lg);
-        border: 1px solid rgba(26, 26, 26, 0.18);
+        border: 1px solid var(--line);
         background: var(--paper);
         overflow: hidden;
-        box-shadow: 0 18px 44px rgba(26, 26, 26, 0.10);
+        box-shadow: 0 18px 44px rgba(26, 26, 26, 0.08);
+        transition: all 0.4s var(--transition-smooth);
+      }
+      .gallery-frame:hover {
+        box-shadow: var(--card-hover-shadow);
+        transform: translateY(-2px);
       }
       .gallery-media {
         position: relative;
         aspect-ratio: 4 / 5;
         background: rgba(9, 12, 16, 0.04);
+        overflow: hidden;
       }
       .gallery-media img {
         width: 100%;
         height: 100%;
         object-fit: cover;
         filter: saturate(1.03) contrast(1.04);
+        transition: transform 0.6s var(--transition-smooth), filter 0.4s ease;
       }
-      .gallery-media::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: transparent;
-        pointer-events: none;
+      .gallery-frame:hover .gallery-media img {
+        transform: scale(1.04);
+        filter: saturate(1.1) contrast(1.05);
       }
       .gallery-caption {
-        padding: 12px 12px 14px;
+        padding: 12px 14px;
         display: flex;
         align-items: center;
         justify-content: space-between;
         gap: 12px;
         border-top: 1px solid var(--line2);
-        background: transparent;
       }
-      .gallery-caption b {
-        font-size: 13px;
-        letter-spacing: -0.01em;
-      }
-      .gallery-caption span {
-        font-size: 12px;
-        color: rgba(9, 12, 16, 0.55);
-      }
+      .gallery-caption b { font-size: 13px; letter-spacing: -0.01em; }
+      .gallery-caption span { font-size: 12px; color: var(--muted); }
+
       .mini {
         border-radius: var(--radius-md);
         border: 1px solid var(--line);
         background: transparent;
-        padding: 12px;
+        padding: 14px;
         display: grid;
         gap: 4px;
+        transition: all 0.25s var(--transition-smooth);
       }
-      .mini b {
-        font-size: 12.5px;
-        letter-spacing: -0.01em;
+      .mini:hover {
+        border-color: var(--accent-mid);
+        background: var(--accent-light);
+        transform: translateY(-1px);
       }
-      .mini span {
-        font-size: 12px;
-        color: var(--muted);
-      }
+      .mini b { font-size: 12.5px; letter-spacing: -0.01em; }
+      .mini span { font-size: 12px; color: var(--muted); }
 
-      /* Sections */
+      /* ========================================
+         SECTIONS
+         ======================================== */
       section {
-        margin-top: 46px;
-        padding-top: 38px;
+        margin-top: 48px;
+        padding-top: 40px;
         border-top: 1px solid var(--line2);
-      }
-
-      /* Convergence */
-      .convergence {
-        display: grid;
-        grid-template-columns: 1.05fr 0.95fr;
-        gap: 14px;
-        align-items: stretch;
-      }
-      .convergence .gallery-media {
-        aspect-ratio: 16 / 10;
-      }
-      @media (max-width: 980px) {
-        .convergence {
-          grid-template-columns: 1fr;
-        }
-        .convergence .gallery-media {
-          aspect-ratio: 16 / 10;
-        }
       }
 
       .sec-head {
@@ -409,25 +474,39 @@
         justify-content: space-between;
         gap: 18px;
         flex-wrap: wrap;
-        margin-bottom: 14px;
+        margin-bottom: 18px;
       }
       .sec-head h2 {
         font-family: Fraunces, ui-serif, Georgia, serif;
         font-weight: 600;
         letter-spacing: -0.02em;
         margin: 0;
-        font-size: 26px;
+        font-size: 28px;
       }
       .sec-head p {
-        margin: 0;
+        margin: 4px 0 0;
         color: var(--muted);
         max-width: 70ch;
       }
 
+      /* ========================================
+         CONVERGENCE
+         ======================================== */
+      .convergence {
+        display: grid;
+        grid-template-columns: 1.05fr 0.95fr;
+        gap: 16px;
+        align-items: stretch;
+      }
+      .convergence .gallery-media { aspect-ratio: 16 / 10; }
+
+      /* ========================================
+         GRID & CARDS
+         ======================================== */
       .grid {
         display: grid;
         grid-template-columns: repeat(12, 1fr);
-        gap: 14px;
+        gap: 16px;
       }
 
       .card {
@@ -435,40 +514,38 @@
         border-radius: var(--radius-xl);
         border: 1px solid var(--line);
         background: var(--paper);
-        box-shadow: none;
         overflow: hidden;
-        transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+        transition: all 0.35s var(--transition-smooth);
         min-height: 278px;
         display: grid;
         grid-template-rows: auto 1fr;
       }
       .card:hover {
-        transform: translateY(-2px);
-        border-color: rgba(9, 12, 16, 0.18);
-        background: var(--paper);
+        transform: translateY(-4px);
+        border-color: var(--accent-mid);
+        box-shadow: var(--card-hover-shadow);
       }
 
       .thumb {
         position: relative;
-        background: rgba(9, 12, 16, 0.04);
+        background: rgba(9, 12, 16, 0.03);
         aspect-ratio: 4 / 3;
-        padding: 12px;
-      }
-      .thumb.alt {
-        background: rgba(9, 12, 16, 0.04);
+        overflow: hidden;
       }
       .thumb img {
         width: 100%;
         height: 100%;
         object-fit: cover;
-        border-radius: 8px;
+        border-radius: 0;
         display: block;
+        transition: transform 0.5s var(--transition-smooth);
       }
-      /* Force consistent gallery tiles in grid sections */
+      .card:hover .thumb img {
+        transform: scale(1.06);
+      }
+
       #culinary .thumb,
-      #3d .thumb {
-        aspect-ratio: 4 / 3;
-      }
+      #3d .thumb { aspect-ratio: 4 / 3; }
       #culinary .thumb img,
       #3d .thumb img {
         width: 100%;
@@ -476,22 +553,8 @@
         object-fit: cover;
       }
 
-      .thumb .ph {
-        position: absolute;
-        inset: 14px;
-        border-radius: var(--radius-lg);
-        border: 1px dashed rgba(9, 12, 16, 0.22);
-        background: rgba(255, 255, 255, 0.65);
-        display: grid;
-        place-content: center;
-        text-align: center;
-        padding: 10px;
-        color: rgba(9, 12, 16, 0.74);
-        font-size: 12.5px;
-      }
-
       .card .body {
-        padding: 14px 14px 16px;
+        padding: 16px;
         display: grid;
         gap: 8px;
         align-content: start;
@@ -500,7 +563,7 @@
         display: inline-flex;
         align-items: center;
         gap: 8px;
-        color: rgba(9, 12, 16, 0.62);
+        color: var(--muted);
         font-size: 12px;
         letter-spacing: 0.06em;
         text-transform: uppercase;
@@ -511,145 +574,277 @@
         border-radius: 99px;
         display: inline-block;
         background: var(--accent);
-        box-shadow: none;
       }
-      .kicker i.gold {
-        background: rgba(9, 12, 16, 0.45);
-        box-shadow: none;
-      }
+      .kicker i.gold { background: rgba(234, 179, 8, 0.65); }
+
       .card h3 {
         margin: 0;
         font-size: 16px;
         letter-spacing: -0.02em;
       }
-      .card p {
-        margin: 0;
-        color: var(--muted);
-        font-size: 13.5px;
-      }
+      .card p { margin: 0; color: var(--muted); font-size: 13.5px; }
+
       .chips {
         display: flex;
         flex-wrap: wrap;
         gap: 8px;
-        margin-top: 2px;
+        margin-top: 4px;
       }
       .chip {
         font-size: 12px;
-        color: rgba(9, 12, 16, 0.66);
+        color: var(--muted);
         background: transparent;
         border: 1px solid var(--line);
-        padding: 7px 10px;
+        padding: 6px 12px;
         border-radius: 999px;
+        transition: all 0.25s var(--transition-smooth);
+      }
+      .chip:hover {
+        border-color: var(--accent-mid);
+        background: var(--accent-light);
+        color: var(--ink);
       }
 
-      /* About / services */
+      /* ========================================
+         FEATURED PROJECT (Clear Garden)
+         ======================================== */
+      .project-card {
+        grid-column: 1 / -1;
+        background: #1a1a1a;
+        color: #f5f5f4;
+        border: none;
+        padding: 48px;
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-height: 320px;
+        border-radius: var(--radius-xl);
+        overflow: hidden;
+        position: relative;
+        transition: transform 0.4s var(--transition-smooth), box-shadow 0.4s ease;
+      }
+      [data-theme="dark"] .project-card {
+        background: linear-gradient(135deg, #1f2937, #374151);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+      }
+      .project-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 32px 64px rgba(0, 0, 0, 0.2);
+      }
+      .project-card .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, rgba(74, 222, 128, 0.1) 0%, transparent 60%);
+        pointer-events: none;
+      }
+      .project-content { position: relative; z-index: 1; }
+      .project-tag {
+        display: inline-block;
+        padding: 6px 14px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 999px;
+        font-size: 13px;
+        margin-bottom: 20px;
+        color: #e5e7eb;
+      }
+      [data-theme="dark"] .project-tag {
+        border-color: rgba(74, 222, 128, 0.4);
+        color: #a7f3d0;
+      }
+      .project-card h3 {
+        font-family: Fraunces, ui-serif, Georgia, serif;
+        font-size: 2.4rem;
+        margin: 0 0 16px;
+        letter-spacing: -0.02em;
+        font-weight: 600;
+        color: #ffffff;
+      }
+      [data-theme="dark"] .project-card h3 { color: #f9fafb; }
+      .project-card h3 span {
+        font-style: italic;
+        font-weight: 200;
+        opacity: 0.8;
+      }
+      .project-card p {
+        max-width: 600px;
+        font-size: 1.05rem;
+        line-height: 1.65;
+        color: #d1d5db;
+        margin: 0 0 24px;
+      }
+      [data-theme="dark"] .project-card p { color: #d1d5db; }
+      .project-card .chip {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.18);
+        color: #e5e7eb;
+      }
+      [data-theme="dark"] .project-card .chip {
+        background: rgba(74, 222, 128, 0.1);
+        border-color: rgba(74, 222, 128, 0.25);
+        color: #a7f3d0;
+      }
+
+      /* ========================================
+         PANELS (About, Services)
+         ======================================== */
       .two {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 14px;
+        gap: 16px;
         align-items: stretch;
       }
       .panel {
         border-radius: var(--radius-xl);
         border: 1px solid var(--line);
         background: var(--paper);
-        padding: 16px;
-        box-shadow: none;
+        padding: 20px;
+        transition: all 0.3s var(--transition-smooth);
+      }
+      .panel:hover {
+        border-color: var(--accent-mid);
       }
       .panel h3 {
-        margin: 0 0 8px;
+        margin: 0 0 10px;
         font-size: 16px;
         letter-spacing: -0.02em;
       }
-      .panel p {
-        margin: 0 0 10px;
-        color: var(--muted);
-      }
-
+      .panel p { margin: 0 0 10px; color: var(--muted); }
       .panel.lede-panel p {
         font-size: 15.5px;
         line-height: 1.65;
         max-width: 70ch;
       }
+
       .list {
         display: grid;
         gap: 10px;
         margin: 0;
         padding-left: 18px;
-        color: rgba(9, 12, 16, 0.78);
+        color: var(--muted);
       }
-      .list li {
-        color: rgba(9, 12, 16, 0.72);
-      }
-      .list b {
-        color: rgba(9, 12, 16, 0.92);
-        font-weight: 650;
-      }
+      .list li { color: var(--muted); }
+      .list b { color: var(--ink); font-weight: 650; }
 
-      /* Contact */
+      /* ========================================
+         CONTACT
+         ======================================== */
       .contact {
         display: grid;
         grid-template-columns: 1.15fr 0.85fr;
-        gap: 14px;
+        gap: 16px;
         align-items: start;
       }
-      .contact .panel {
-        background: var(--paper);
-      }
+
       .fields {
         display: grid;
-        gap: 10px;
-        margin-top: 10px;
+        gap: 12px;
+        margin-top: 12px;
       }
-      .field {
-        display: grid;
-        gap: 6px;
-      }
+      .field { display: grid; gap: 6px; }
       label {
         font-size: 12.5px;
-        color: rgba(9, 12, 16, 0.62);
+        color: var(--muted);
+        font-weight: 500;
       }
-      input,
-      textarea {
+      input, textarea {
         width: 100%;
         border-radius: var(--radius-md);
         border: 1px solid var(--line);
         background: rgba(9, 12, 16, 0.02);
-        padding: 11px 12px;
-        color: rgba(9, 12, 16, 0.92);
+        padding: 12px 14px;
+        color: var(--ink);
         outline: none;
         font: inherit;
-        transition: border-color 160ms ease, background 160ms ease;
+        font-size: 14px;
+        transition: all 0.3s var(--transition-smooth);
       }
-      textarea {
-        min-height: 120px;
-        resize: vertical;
+      [data-theme="dark"] input,
+      [data-theme="dark"] textarea {
+        background: rgba(255, 255, 255, 0.04);
       }
-      input:focus,
-      textarea:focus {
-        border-color: rgba(47, 143, 99, 0.55);
-        background: rgba(47, 143, 99, 0.06);
+      textarea { min-height: 120px; resize: vertical; }
+      input:focus, textarea:focus {
+        border-color: var(--accent-glow);
+        background: var(--accent-light);
+        box-shadow: 0 0 0 3px rgba(47, 143, 99, 0.08);
       }
 
       .fineprint {
         margin: 10px 0 0;
         font-size: 12.5px;
-        color: rgba(9, 12, 16, 0.55);
+        color: var(--muted);
       }
 
+      /* ========================================
+         SOCIAL LINKS
+         ======================================== */
+      .social-links {
+        display: flex;
+        gap: 10px;
+        margin-top: 16px;
+        flex-wrap: wrap;
+      }
+      .social-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 16px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        font-size: 13px;
+        color: var(--muted);
+        transition: all 0.3s var(--transition-smooth);
+        text-decoration: none;
+      }
+      .social-link:hover {
+        color: var(--ink);
+        border-color: var(--accent-mid);
+        background: var(--accent-light);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(47, 143, 99, 0.1);
+      }
+      .social-link svg {
+        width: 16px;
+        height: 16px;
+        flex-shrink: 0;
+        opacity: 0.7;
+        transition: opacity 0.25s ease;
+      }
+      .social-link:hover svg { opacity: 1; }
+
+      /* LinkedIn special style */
+      .social-link.linkedin:hover {
+        border-color: rgba(10, 102, 194, 0.35);
+        background: rgba(10, 102, 194, 0.06);
+        box-shadow: 0 6px 16px rgba(10, 102, 194, 0.1);
+      }
+      [data-theme="dark"] .social-link.linkedin:hover {
+        border-color: rgba(10, 102, 194, 0.45);
+        background: rgba(10, 102, 194, 0.12);
+      }
+
+      /* ========================================
+         FOOTER
+         ======================================== */
       footer {
-        margin-top: 34px;
-        padding-top: 18px;
+        margin-top: 40px;
+        padding-top: 20px;
         border-top: 1px solid var(--line2);
-        color: rgba(9, 12, 16, 0.55);
+        color: var(--muted);
         display: flex;
         align-items: center;
         justify-content: space-between;
         gap: 12px;
         flex-wrap: wrap;
       }
-      footer small {
-        font-size: 12.5px;
+      footer small { font-size: 12.5px; }
+      footer .craft-badge {
+        color: var(--accent);
+        opacity: 0.8;
       }
 
       .sr-only {
@@ -664,91 +859,134 @@
         border-width: 0;
       }
 
-      /* Responsive */
+      /* ========================================
+         HAND-DRAWN DOODLES
+         ======================================== */
+      .doodle {
+        position: absolute;
+        pointer-events: none;
+        opacity: 0.07;
+        z-index: 0;
+        transition: opacity 0.4s ease;
+      }
+      [data-theme="dark"] .doodle { opacity: 0.06; }
+      .doodle svg { width: 100%; height: 100%; }
+
+      .doodle-whisk { width: 120px; height: 120px; top: -20px; right: 60px; transform: rotate(-15deg); }
+      .doodle-cupcake { width: 100px; height: 100px; bottom: 30px; left: 40px; transform: rotate(8deg); }
+      .doodle-croissant { width: 110px; height: 110px; top: 20px; left: -30px; transform: rotate(-10deg); }
+      .doodle-spoon { width: 90px; height: 90px; bottom: -10px; right: 20px; transform: rotate(25deg); }
+      .doodle-star1 { width: 40px; height: 40px; top: 15%; right: 8%; animation: floatDoodle 6s ease-in-out infinite; }
+      .doodle-star2 { width: 30px; height: 30px; bottom: 20%; left: 5%; animation: floatDoodle 8s ease-in-out infinite reverse; }
+      .doodle-star3 { width: 35px; height: 35px; top: 40%; right: 3%; animation: floatDoodle 7s ease-in-out infinite 1s; }
+
+      /* Section-level doodle containers */
+      .sec-doodle-wrap { position: relative; }
+
+      @keyframes floatDoodle {
+        0%, 100% { transform: translateY(0) rotate(0deg); }
+        50% { transform: translateY(-8px) rotate(5deg); }
+      }
+
+      /* Scroll to top button */
+      .scroll-top {
+        position: fixed;
+        bottom: 28px;
+        right: 28px;
+        width: 44px;
+        height: 44px;
+        border-radius: 14px;
+        border: 1px solid var(--line);
+        background: var(--paper);
+        color: var(--ink);
+        display: grid;
+        place-content: center;
+        cursor: pointer;
+        opacity: 0;
+        transform: translateY(12px);
+        transition: all 0.3s var(--transition-smooth);
+        z-index: 40;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+      }
+      .scroll-top.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .scroll-top:hover {
+        border-color: var(--accent-mid);
+        background: var(--accent-light);
+        transform: translateY(-2px);
+      }
+      .scroll-top svg { width: 18px; height: 18px; }
+
+      /* ========================================
+         RESPONSIVE
+         ======================================== */
       @media (max-width: 980px) {
-        .hero {
-          grid-template-columns: 1fr;
-        }
-        .side-card {
-          min-height: 260px;
-        }
-        .gallery-media {
-          aspect-ratio: 16 / 10;
-        }
-        .card {
-          grid-column: span 6;
-        }
-        .contact {
-          grid-template-columns: 1fr;
-        }
+        .hero { grid-template-columns: 1fr; }
+        .side-card { min-height: 260px; }
+        .gallery-media { aspect-ratio: 16 / 10; }
+        .card { grid-column: span 6; }
+        .contact { grid-template-columns: 1fr; }
+        .convergence { grid-template-columns: 1fr; }
+        .convergence .gallery-media { aspect-ratio: 16 / 10; }
+      }
+      @media (max-width: 768px) {
+        .doodle { display: none; }
       }
       @media (max-width: 640px) {
-        .brand {
-          min-width: auto;
-        }
-        nav .links {
+        .brand { min-width: auto; }
+        nav .links { gap: 6px; flex-wrap: wrap; justify-content: center; }
+        .pill { padding: 7px 12px; font-size: 12.5px; }
+        .card { grid-column: span 12; }
+        .two { grid-template-columns: 1fr; }
+        .project-card { padding: 28px; }
+        .project-card h3 { font-size: 1.7rem; }
+        .meta-row { gap: 8px; }
+        .tag { font-size: 12px; padding: 6px 10px; }
+        .cta-row { gap: 8px; }
+        .btn { padding: 10px 14px; font-size: 13px; }
+      }
+      @media (max-width: 600px) {
+        .nav {
+          flex-direction: column;
+          align-items: center;
           gap: 10px;
+          padding: 10px 16px;
         }
-        .pill {
-          padding: 9px 10px;
+        .nav-right {
+          width: 100%;
+          justify-content: center;
+          gap: 8px;
+          flex-wrap: wrap;
         }
-        .card {
-          grid-column: span 12;
-        }
-        .two {
-          grid-template-columns: 1fr;
-        }
+        .nav .links { justify-content: center; gap: 6px; flex-wrap: wrap; }
+        .pill { padding: 6px 10px; font-size: 12px; }
+        .brand { min-width: auto; justify-content: center; }
+        .hero { display: block; padding-top: 20px; }
+        .hero h1 { font-size: 32px; }
+        .manifesto { font-size: 15px; }
+        .meta-row { flex-direction: column; gap: 6px; }
+        .cta-row { flex-direction: column; gap: 8px; }
+        .btn { width: 100%; justify-content: center; }
+        .social-links { flex-direction: column; }
+        .social-link { justify-content: center; }
+        .contact { gap: 12px; }
+        .mini-grid { grid-template-columns: 1fr; gap: 8px; }
+        .convergence { gap: 12px; }
       }
 
       /* Reduced motion */
       @media (prefers-reduced-motion: reduce) {
-        * {
-          scroll-behavior: auto !important;
+        *, *::before, *::after {
           animation-duration: 0.001ms !important;
           animation-iteration-count: 1 !important;
           transition-duration: 0.001ms !important;
+          scroll-behavior: auto !important;
         }
+        .reveal { opacity: 1; transform: none; }
       }
-      @media (max-width: 600px) {
-        .nav {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          gap: 12px;
-          padding: 10px 0;
-        }
-
-        .nav nav {
-          width: 100%;
-          justify-content: center;
-          gap: 6px !important;
-        }
-
-        .pill {
-          padding: 6px 10px;
-          font-size: 12px;
-          white-space: nowrap;
-        }
-
-        .brand {
-          min-width: auto;
-          justify-content: center;
-        }
-        
-        .hero {
-          display: block; 
-          padding-top: 20px;
-        }
-      }
-      .hero-image img {
-        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-      }
-
-      .hero-image img:hover {
-        transform: scale(1.03) translateY(-5px);
-        filter: drop-shadow(0 20px 30px rgba(0,0,0,0.1));
-      }
-   </style>
+    </style>
   </head>
 
   <body>
@@ -760,37 +998,67 @@
           </span>
           <span class="name">
             <strong>Bob Wu</strong>
-            <span>Dublin • Cordon Bleu Chef × 3D Tech Entrepreneur</span>
+            <span>Dublin · Cordon Bleu Chef × 3D Tech</span>
           </span>
         </a>
 
-        <nav class="links" aria-label="Jump links">
-          <a class="pill" href="#culinary">Culinary</a>
-          <a class="pill" href="#3d">3D Projects</a>
-          <a class="pill" href="#about">About</a>
-          <a class="pill primary" href="#contact">Enquire</a>
-        </nav>
+        <div class="nav-right">
+          <nav class="links" aria-label="Jump links">
+            <a class="pill" href="#culinary">Culinary</a>
+            <a class="pill" href="#3d">3D Projects</a>
+            <a class="pill" href="#about">About</a>
+            <a class="pill primary" href="#contact">Enquire</a>
+          </nav>
+          <button class="theme-toggle" aria-label="Toggle dark mode" onclick="toggleTheme()">
+            <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg>
+            <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path stroke-linecap="round" d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+          </button>
+        </div>
       </div>
     </header>
 
+    <!-- Scroll to top -->
+    <button class="scroll-top" id="scrollTop" aria-label="Scroll to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"/></svg>
+    </button>
+
     <main id="top">
       <div class="wrap">
-        <div class="hero" aria-label="Intro">
+        <!-- ====== HERO ====== -->
+        <div class="hero" aria-label="Intro" style="position:relative;">
+          <!-- Hand-drawn doodle decorations -->
+          <div class="doodle doodle-whisk" aria-hidden="true">
+            <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M60 110 C60 110 58 70 58 55 C58 40 50 20 40 12 M60 110 C60 110 62 70 62 55 C62 40 70 20 80 12 M60 110 C60 110 60 70 60 55 C60 38 60 18 60 8 M60 55 C50 50 42 35 38 25 M60 55 C70 50 78 35 82 25" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <ellipse cx="60" cy="112" rx="6" ry="3" stroke="currentColor" stroke-width="2"/>
+            </svg>
+          </div>
+          <div class="doodle doodle-star1" aria-hidden="true">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M20 4 L23 16 L36 20 L23 24 L20 36 L17 24 L4 20 L17 16 Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="doodle doodle-star2" aria-hidden="true">
+            <svg viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="15" cy="15" r="3" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M15 5 V10 M15 20 V25 M5 15 H10 M20 15 H25 M8 8 L11 11 M19 19 L22 22 M22 8 L19 11 M11 19 L8 22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
           <div>
-            <h1>Precision on the pass</h1>
-            <p class="manifesto">
-              Precision is the universal language I speak—whether it is the micron-level calibration of a 3D
+            <h1 class="reveal">Precision on<br>the <span class="accent-word">pass</span></h1>
+            <p class="manifesto reveal reveal-delay-1">
+              Precision is the universal language I speak — whether it is the micron-level calibration of a 3D
               printer or the obsessive decoration of a Cordon Bleu tartlet.
             </p>
-            <p class="lede">Dublin-based. Available for select culinary and product briefs.</p>
+            <p class="lede reveal reveal-delay-2">Dublin-based. Available for select culinary and product briefs.</p>
 
-            <div class="meta-row" aria-label="Highlights">
-              <span class="tag"><span class="dot" aria-hidden="true"></span> Dublin-based • available for select projects</span>
-              <span class="tag"><span class="dot gold" aria-hidden="true"></span> Private dining • brand collaborations</span>
-              <span class="tag"><span class="dot blue" aria-hidden="true"></span> 3D prototyping • product storytelling</span>
+            <div class="meta-row reveal reveal-delay-2" aria-label="Highlights">
+              <span class="tag"><span class="dot" aria-hidden="true"></span> Dublin-based · available for select projects</span>
+              <span class="tag"><span class="dot gold" aria-hidden="true"></span> Private dining · brand collaborations</span>
+              <span class="tag"><span class="dot blue" aria-hidden="true"></span> 3D prototyping · product storytelling</span>
             </div>
 
-            <div class="cta-row">
+            <div class="cta-row reveal reveal-delay-3">
               <a class="btn primary" href="#contact" aria-label="Jump to enquiry section">
                 Start a conversation <span class="arrow" aria-hidden="true">→</span>
               </a>
@@ -803,19 +1071,19 @@
             </div>
           </div>
 
-          <aside class="side-card" aria-label="Hero gallery">
+          <aside class="side-card reveal reveal-delay-1" aria-label="Hero gallery">
             <div class="gallery-frame">
               <div class="gallery-media">
                 <img
                   src="IMG_9192.jpg"
-                  alt="Chef precision portrait (placeholder)"
+                  alt="Chef Bob Wu portrait"
                   loading="eager"
                   decoding="async"
                 />
               </div>
               <div class="gallery-caption">
-                <b>Chef’s precision</b>
-                <span>Hero image placeholder</span>
+                <b>Chef's precision</b>
+                <span>Dublin, Ireland</span>
               </div>
             </div>
 
@@ -830,7 +1098,7 @@
               </div>
               <div class="mini">
                 <b>Based in</b>
-                <span>Dublin • available across Ireland</span>
+                <span>Dublin · available across Ireland</span>
               </div>
               <div class="mini">
                 <b>Best fit</b>
@@ -840,68 +1108,74 @@
           </aside>
         </div>
 
+        <!-- ====== CONVERGENCE ====== -->
         <section id="convergence" aria-labelledby="convergence-title">
-          <div class="sec-head">
+          <div class="sec-head reveal">
             <div>
               <h2 id="convergence-title">The Convergence</h2>
             </div>
           </div>
 
           <div class="convergence" aria-label="Culinary and 3D convergence feature">
-            <div class="panel">
+            <div class="panel reveal">
               <div class="gallery-frame">
                 <div class="gallery-media">
                   <img
                     src="3d_master_black.jpg"
-                    alt="3D printed topological structure (placeholder)"
+                    alt="3D printed topological structure"
                     loading="lazy"
                     decoding="async"
                   />
                 </div>
                 <div class="gallery-caption">
                   <b>3D printing expertise</b>
-                  <span>
-                    Engineering the impossible: Exploring complex topological structures through additive manufacturing.
-                  </span>
+                  <span>Exploring complex topological structures through additive manufacturing.</span>
                 </div>
               </div>
             </div>
 
-            <div class="panel">
+            <div class="panel reveal reveal-delay-1">
               <h3>Where craft meets computation</h3>
               <p>
-                Engineering-led prototyping with a chef’s obsession for finish — turning complex geometry into objects
+                Engineering-led prototyping with a chef's obsession for finish — turning complex geometry into objects
                 you can hold, test, and refine.
               </p>
             </div>
           </div>
         </section>
 
-        <section id="culinary" aria-labelledby="culinary-title">
-          <div class="sec-head">
+        <!-- ====== CULINARY ====== -->
+        <section id="culinary" aria-labelledby="culinary-title" style="position:relative;">
+          <!-- Culinary doodles -->
+          <div class="doodle doodle-cupcake" aria-hidden="true">
+            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M30 55 C30 55 28 75 30 82 C30 85 70 85 70 82 C72 75 70 55 70 55" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M30 55 C30 40 35 30 50 28 C65 30 70 40 70 55" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="M50 28 C50 28 48 18 50 12 C52 8 55 10 53 16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <path d="M38 35 C42 32 46 34 44 38 M56 35 C52 32 48 34 50 38 M62 42 C58 40 56 43 59 45" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="doodle doodle-star3" aria-hidden="true">
+            <svg viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M17.5 3 L20 14 L31 17.5 L20 21 L17.5 32 L15 21 L4 17.5 L15 14 Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" fill="currentColor" fill-opacity="0.04"/>
+            </svg>
+          </div>
+          <div class="sec-head reveal">
             <div>
               <h2 id="culinary-title">Culinary Craftsmanship</h2>
               <p>A journey from the kitchens of Le Cordon Bleu to the art of precision pastry.</p>
             </div>
           </div>
 
-          <div class="grid" role="list" aria-label="Culinary portfolio items">
-            <article class="card" role="listitem">
+          <div class="grid stagger-children" role="list" aria-label="Culinary portfolio items">
+            <article class="card reveal" role="listitem">
               <div class="thumb">
-                <img
-                  src="chef_work_metallic.jpg"
-                  alt="Culinary work: metallic pastry detail"
-                  loading="lazy"
-                  decoding="async"
-                  style="aspect-ratio: 4/3; object-fit: cover;"
-                />
+                <img src="chef_work_metallic.jpg" alt="Culinary work: metallic pastry detail" loading="lazy" decoding="async" />
               </div>
               <div class="body">
                 <div class="kicker"><i aria-hidden="true"></i> Tasting menu</div>
                 <h3>[Dish / Course Title]</h3>
-                <p>
-                  A short story about flavour and intent — seasonal, balanced, and quietly confident.
-                </p>
+                <p>A short story about flavour and intent — seasonal, balanced, and quietly confident.</p>
                 <div class="chips" aria-label="Tags">
                   <span class="chip">Seasonal</span>
                   <span class="chip">Modern Irish</span>
@@ -910,22 +1184,14 @@
               </div>
             </article>
 
-            <article class="card" role="listitem">
-              <div class="thumb alt">
-                <img
-                  src="chef_work_1.jpg"
-                  alt="Culinary work: plated course"
-                  loading="lazy"
-                  decoding="async"
-                  style="aspect-ratio: 4/3; object-fit: cover;"
-                />
+            <article class="card reveal" role="listitem">
+              <div class="thumb">
+                <img src="chef_work_1.jpg" alt="Culinary work: plated course" loading="lazy" decoding="async" />
               </div>
               <div class="body">
                 <div class="kicker"><i class="gold" aria-hidden="true"></i> Pâtisserie</div>
                 <h3>[Dessert / Pastry Title]</h3>
-                <p>
-                  Precision textures, clean sweetness, and a finish that feels like a proper treat.
-                </p>
+                <p>Precision textures, clean sweetness, and a finish that feels like a proper treat.</p>
                 <div class="chips" aria-label="Tags">
                   <span class="chip">Chocolate</span>
                   <span class="chip">Citrus</span>
@@ -934,22 +1200,14 @@
               </div>
             </article>
 
-            <article class="card" role="listitem">
+            <article class="card reveal" role="listitem">
               <div class="thumb">
-                <img
-                  src="chef_work_2.jpg"
-                  alt="Culinary work: pastry detail"
-                  loading="lazy"
-                  decoding="async"
-                  style="aspect-ratio: 4/3; object-fit: cover;"
-                />
+                <img src="chef_work_2.jpg" alt="Culinary work: pastry detail" loading="lazy" decoding="async" />
               </div>
               <div class="body">
                 <div class="kicker"><i aria-hidden="true"></i> Experience</div>
                 <h3>[Event / Collaboration]</h3>
-                <p>
-                  A calm, polished service — built around your guests, your brand, and the moment you’re after.
-                </p>
+                <p>A calm, polished service — built around your guests, your brand, and the moment you're after.</p>
                 <div class="chips" aria-label="Tags">
                   <span class="chip">Private dining</span>
                   <span class="chip">Brand collab</span>
@@ -959,8 +1217,18 @@
             </article>
           </div>
         </section>
-        <section id="digital-craftsmanship" aria-labelledby="digital-title">
-          <div class="sec-head">
+
+        <!-- ====== DIGITAL CRAFTSMANSHIP ====== -->
+        <section id="digital-craftsmanship" aria-labelledby="digital-title" style="position:relative;">
+          <!-- Croissant doodle -->
+          <div class="doodle doodle-croissant" aria-hidden="true">
+            <svg viewBox="0 0 110 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M20 65 C20 65 30 35 55 30 C80 35 90 65 90 65 C90 65 80 55 55 52 C30 55 20 65 20 65Z" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M35 55 C40 45 50 38 55 37 M75 55 C70 45 60 38 55 37" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M30 62 C35 52 45 42 55 40 M80 62 C75 52 65 42 55 40" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" opacity="0.5"/>
+            </svg>
+          </div>
+          <div class="sec-head reveal">
             <div>
               <h2 id="digital-title">Digital Craftsmanship</h2>
               <p>
@@ -972,24 +1240,19 @@
           </div>
 
           <div class="convergence" aria-label="Digital craftsmanship feature">
-            <div class="panel lede-panel">
+            <div class="panel lede-panel reveal">
               <h3>From mise en place to micron-level control</h3>
               <p>
                 In the kitchen, consistency is engineered — temperatures, timings, and repeatable technique. In 3D
                 printing, the same mindset becomes layer height, calibration, and material behavior. The result is
-                work that’s both expressive and testable: complex geometry you can hold, evaluate, and refine.
+                work that's both expressive and testable: complex geometry you can hold, evaluate, and refine.
               </p>
             </div>
 
-            <div class="panel">
+            <div class="panel reveal reveal-delay-1">
               <div class="gallery-frame">
                 <div class="gallery-media">
-                  <img
-                    src="3d_design_hand.jpg"
-                    alt="3D printed topological structure (placeholder)"
-                    loading="lazy"
-                    decoding="async"
-                  />
+                  <img src="3d_design_hand.jpg" alt="3D printed structure held in hand" loading="lazy" decoding="async" />
                 </div>
                 <div class="gallery-caption">
                   <b>Engineering the impossible</b>
@@ -1000,10 +1263,11 @@
           </div>
         </section>
 
+        <!-- ====== 3D PROJECTS ====== -->
         <section id="3d" aria-labelledby="d3-title">
-          <div class="sec-head">
+          <div class="sec-head reveal">
             <div>
-              <h2 id="d3-title">3D printed projects</h2>
+              <h2 id="d3-title">3D Printed Projects</h2>
               <p>
                 Prototypes, product concepts, and tactile storytelling — designed to be held, tested, and improved.
                 From first sketch to a clean demo, I keep it practical and elegant.
@@ -1011,23 +1275,15 @@
             </div>
           </div>
 
-          <div class="grid" role="list" aria-label="3D portfolio items">
-            <article class="card" role="listitem">
-              <div class="thumb alt">
-                <img
-                  src="3d_masterpiece.jpg"
-                  alt="3D print: masterpiece"
-                  loading="lazy"
-                  decoding="async"
-                  style="aspect-ratio: 4/3; object-fit: cover;"
-                />
+          <div class="grid stagger-children" role="list" aria-label="3D portfolio items">
+            <article class="card reveal" role="listitem">
+              <div class="thumb">
+                <img src="3d_masterpiece.jpg" alt="3D print: masterpiece" loading="lazy" decoding="async" />
               </div>
               <div class="body">
                 <div class="kicker"><i class="gold" aria-hidden="true"></i> Prototype</div>
                 <h3>[Project Name]</h3>
-                <p>
-                  A clean first pass built fast — optimised for iteration, testing, and proper stakeholder buy-in.
-                </p>
+                <p>A clean first pass built fast — optimised for iteration, testing, and proper stakeholder buy-in.</p>
                 <div class="chips" aria-label="Tags">
                   <span class="chip">Rapid iteration</span>
                   <span class="chip">Fit & finish</span>
@@ -1036,22 +1292,14 @@
               </div>
             </article>
 
-            <article class="card" role="listitem">
+            <article class="card reveal" role="listitem">
               <div class="thumb">
-                <img
-                  src="3d_red_prototype.jpg"
-                  alt="3D print: red prototype"
-                  loading="lazy"
-                  decoding="async"
-                  style="aspect-ratio: 4/3; object-fit: cover;"
-                />
+                <img src="3d_red_prototype.jpg" alt="3D print: red prototype" loading="lazy" decoding="async" />
               </div>
               <div class="body">
                 <div class="kicker"><i aria-hidden="true"></i> Engineering</div>
                 <h3>[Functional Print]</h3>
-                <p>
-                  Designed for real-world use — tolerances, materials, and constraints considered from day one.
-                </p>
+                <p>Designed for real-world use — tolerances, materials, and constraints considered from day one.</p>
                 <div class="chips" aria-label="Tags">
                   <span class="chip">Tolerance</span>
                   <span class="chip">Materials</span>
@@ -1060,22 +1308,14 @@
               </div>
             </article>
 
-            <article class="card" role="listitem">
-              <div class="thumb alt">
-                <img
-                  src="3d_tech_printer.jpg"
-                  alt="3D printer and in-progress build"
-                  loading="lazy"
-                  decoding="async"
-                  style="aspect-ratio: 4/3; object-fit: cover;"
-                />
+            <article class="card reveal" role="listitem">
+              <div class="thumb">
+                <img src="3d_tech_printer.jpg" alt="3D printer and in-progress build" loading="lazy" decoding="async" />
               </div>
               <div class="body">
                 <div class="kicker"><i class="gold" aria-hidden="true"></i> Storytelling</div>
                 <h3>[Brand Object / Concept]</h3>
-                <p>
-                  A tactile artefact that makes your idea feel obvious — refined enough to sit on a boardroom table.
-                </p>
+                <p>A tactile artefact that makes your idea feel obvious — refined enough to sit on a boardroom table.</p>
                 <div class="chips" aria-label="Tags">
                   <span class="chip">Premium</span>
                   <span class="chip">Narrative</span>
@@ -1083,100 +1323,49 @@
                 </div>
               </div>
             </article>
-            <div
-              class="project-card"
-              style="
-                grid-column: 1 / -1;
-                background: var(--ink);
-                color: var(--bg);
-                border: none;
-                padding: 40px;
-                margin-top: 20px;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                min-height: 300px;
-                border-radius: 4px;
-                overflow: hidden;
-                position: relative;
-              "
-            >
-              <div
-                style="
-                  position: absolute;
-                  top: 0;
-                  left: 0;
-                  width: 100%;
-                  height: 100%;
-                  background: linear-gradient(45deg, rgba(255, 255, 255, 0.05) 0%, transparent 100%);
-                  pointer-events: none;
-                "
-              ></div>
 
-              <div class="project-content" style="position: relative; z-index: 1;">
-                <div
-                  class="project-tag"
-                  style="color: var(--bg); border-color: rgba(253, 252, 251, 0.3); margin-bottom: 20px;"
-                >
-                  Coming Q3 2026
-                </div>
-
-                <h3
-                  class="fraunces"
-                  style="font-size: 2.5rem; margin-bottom: 15px; letter-spacing: -0.02em;"
-                >
-                  Clear Garden
-                  <span style="font-style: italic; font-weight: 200; opacity: 0.8;">Ireland</span>
-                </h3>
-
-                <p
-                  style="
-                    max-width: 600px;
-                    font-size: 1.1rem;
-                    line-height: 1.6;
-                    opacity: 0.9;
-                    margin-bottom: 25px;
-                  "
-                >
+            <!-- Clear Garden featured project -->
+            <div class="project-card reveal">
+              <div class="overlay"></div>
+              <div class="project-content">
+                <div class="project-tag">Coming Q3 2026</div>
+                <h3>Clear Garden <span>Ireland</span></h3>
+                <p>
                   Redefining Irish outdoor living through precision-engineered modular garden rooms. A synergy of
                   high-end Chinese manufacturing and digital craftsmanship.
                 </p>
-
                 <div class="chips">
-                  <span
-                    class="chip"
-                    style="background: rgba(253, 252, 251, 0.1); border-color: transparent; color: var(--bg);"
-                    >Modular Architecture</span
-                  >
-                  <span
-                    class="chip"
-                    style="background: rgba(253, 252, 251, 0.1); border-color: transparent; color: var(--bg);"
-                    >Digital Twin Tech</span
-                  >
-                  <span
-                    class="chip"
-                    style="background: rgba(253, 252, 251, 0.1); border-color: transparent; color: var(--bg);"
-                    >Dublin Based</span
-                  >
+                  <span class="chip">Modular Architecture</span>
+                  <span class="chip">Digital Twin Tech</span>
+                  <span class="chip">Dublin Based</span>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        <section id="about" aria-labelledby="about-title">
-          <div class="sec-head">
+        <!-- ====== ABOUT ====== -->
+        <section id="about" aria-labelledby="about-title" style="position:relative;">
+          <!-- Spoon doodle -->
+          <div class="doodle doodle-spoon" aria-hidden="true">
+            <svg viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M45 10 C35 10 25 18 25 28 C25 38 35 44 45 44 C55 44 65 38 65 28 C65 18 55 10 45 10Z" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="M45 44 L45 82" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="M42 82 C42 84 48 84 48 82" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="sec-head reveal">
             <div>
               <h2 id="about-title">About</h2>
               <p>
                 The through-line is craft — doing the simple things exceptionally well, and bringing a bit of edge
-                when it makes sense. Here’s what I’m set up for.
+                when it makes sense. Here's what I'm set up for.
               </p>
             </div>
           </div>
 
           <div class="two" role="list" aria-label="About panels">
-            <div class="panel" role="listitem">
+            <div class="panel reveal" role="listitem">
               <h3>Culinary focus</h3>
               <p>
                 Classic technique with a modern point of view — built for flavour, flow, and a seamless guest
@@ -1189,7 +1378,7 @@
               </ul>
             </div>
 
-            <div class="panel" role="listitem">
+            <div class="panel reveal reveal-delay-1" role="listitem">
               <h3>3D & product work</h3>
               <p>
                 Fast, high-fidelity prototyping to help you test, pitch, and iterate — without losing the details
@@ -1204,23 +1393,32 @@
           </div>
         </section>
 
-        <section id="contact" aria-labelledby="contact-title">
-          <div class="sec-head">
+        <!-- ====== CONTACT ====== -->
+        <section id="contact" aria-labelledby="contact-title" style="position:relative;">
+          <!-- Chef hat doodle -->
+          <div class="doodle" style="width:100px;height:100px;top:-10px;right:80px;transform:rotate(12deg);" aria-hidden="true">
+            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M25 65 L75 65 L75 72 L25 72 Z" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
+              <path d="M28 65 C28 45 20 38 25 25 C30 15 40 12 50 12 C60 12 70 15 75 25 C80 38 72 45 72 65" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="M40 65 C40 55 42 45 50 42 C58 45 60 55 60 65" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
+            </svg>
+          </div>
+          <div class="sec-head reveal">
             <div>
               <h2 id="contact-title">Enquiries</h2>
               <p>
-                Send a few details and I’ll come back to you. If it’s a good fit, we’ll make something class — no
+                Send a few details and I'll come back to you. If it's a good fit, we'll make something class — no
                 fuss, just quality.
               </p>
             </div>
           </div>
 
           <div class="contact">
-            <div class="panel">
-              <h3>Tell me what you’re after</h3>
+            <div class="panel reveal">
+              <h3>Tell me what you're after</h3>
               <p class="fineprint">
                 This form is a placeholder (no backend yet). Replace the action with your email service or a form
-                provider when you’re ready.
+                provider when you're ready.
               </p>
 
               <form class="fields" action="#" method="post">
@@ -1230,31 +1428,15 @@
                 </div>
                 <div class="field">
                   <label for="email">Email</label>
-                  <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    placeholder="you@example.com"
-                    autocomplete="email"
-                  />
+                  <input id="email" name="email" type="email" placeholder="you@example.com" autocomplete="email" />
                 </div>
                 <div class="field">
                   <label for="type">What do you need?</label>
-                  <input
-                    id="type"
-                    name="type"
-                    type="text"
-                    placeholder="Private dining, brand collab, prototype, product demo…"
-                    autocomplete="off"
-                  />
+                  <input id="type" name="type" type="text" placeholder="Private dining, brand collab, prototype, product demo…" autocomplete="off" />
                 </div>
                 <div class="field">
                   <label for="msg">Notes</label>
-                  <textarea
-                    id="msg"
-                    name="message"
-                    placeholder="Dates, guest count, dietary needs… or what you're building and what you want to show."
-                  ></textarea>
+                  <textarea id="msg" name="message" placeholder="Dates, guest count, dietary needs… or what you're building and what you want to show."></textarea>
                 </div>
                 <button class="btn primary" type="submit">
                   Send enquiry <span class="arrow" aria-hidden="true">→</span>
@@ -1262,19 +1444,30 @@
               </form>
             </div>
 
-            <aside class="panel" aria-label="Contact details">
-              <h3>Contact details</h3>
-              <p class="fineprint">
-                Replace these placeholders with your real links.
-              </p>
-              <div class="chips" aria-label="Links">
-                <a class="chip" href="mailto:wavewubo@hotmail.com" aria-label="Email Bob Wu">Email: wavewubo@hotmail.com</a>
-                <a class="chip" href="https://instagram.com/bowu95" aria-label="Bob Wu on Instagram">Instagram: @bowu95</a>
-                <a class="chip" href="#" aria-label="LinkedIn link placeholder">LinkedIn: [profile]</a>
-                <a class="chip" href="#" aria-label="Portfolio link placeholder">Portfolio PDF: [link]</a>
+            <aside class="panel reveal reveal-delay-1" aria-label="Contact details">
+              <h3>Connect with me</h3>
+
+              <div class="social-links">
+                <!-- LinkedIn -->
+                <a class="social-link linkedin" href="https://www.linkedin.com/in/bo-wu-7754033b8" target="_blank" rel="noopener noreferrer" aria-label="Bob Wu on LinkedIn">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                  LinkedIn
+                </a>
+
+                <!-- Email -->
+                <a class="social-link" href="mailto:wavewubo@hotmail.com" aria-label="Email Bob Wu">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                  wavewubo@hotmail.com
+                </a>
+
+                <!-- Instagram -->
+                <a class="social-link" href="https://instagram.com/bowu95" target="_blank" rel="noopener noreferrer" aria-label="Bob Wu on Instagram">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                  @bowu95
+                </a>
               </div>
 
-              <p class="fineprint" style="margin-top: 12px;">
+              <p class="fineprint" style="margin-top: 16px;">
                 Dublin time (GMT / Irish Standard Time in summer). Replies typically within 1–2 working days.
               </p>
             </aside>
@@ -1284,13 +1477,13 @@
         <footer>
           <small>
             © <span id="year">2026</span> Bob Wu. Dublin, Ireland.
-            <span style="color: rgba(201, 164, 91, 0.85);">Crafted with passion in Dublin</span>
+            <span class="craft-badge">Crafted with passion in Dublin</span>
           </small>
           <small>
-            Built with craft. <span class="sr-only">Decorative separator</span> •
-            <a href="#top" class="pill" style="padding: 7px 10px;">Back to top</a>
+            Built with craft. <span class="sr-only">Decorative separator</span> ·
+            <a href="#top" class="pill" style="padding: 6px 12px; font-size: 12px;">Back to top</a>
           </small>
-          <small style="width: 100%; text-align: center; margin-top: 12px; opacity: 0.6;">
+          <small style="width: 100%; text-align: center; margin-top: 12px; opacity: 0.5;">
             Powered by Shapr3D & Bambu Lab
           </small>
         </footer>
@@ -1298,10 +1491,77 @@
     </main>
 
     <script>
-      // Keep year current without editing content annually.
+      // ====== YEAR ======
       const yearEl = document.getElementById("year");
       if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+
+      // ====== DARK MODE ======
+      function toggleTheme() {
+        const html = document.documentElement;
+        const current = html.getAttribute("data-theme");
+        const next = current === "dark" ? "light" : "dark";
+        html.setAttribute("data-theme", next);
+        try { localStorage.setItem("theme", next); } catch(e) {}
+      }
+      // Restore saved theme
+      (function() {
+        try {
+          const saved = localStorage.getItem("theme");
+          if (saved) {
+            document.documentElement.setAttribute("data-theme", saved);
+          } else if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+            document.documentElement.setAttribute("data-theme", "dark");
+          }
+        } catch(e) {}
+      })();
+
+      // ====== HEADER SCROLL SHADOW ======
+      const header = document.querySelector("header");
+      window.addEventListener("scroll", function() {
+        if (window.scrollY > 10) {
+          header.classList.add("scrolled");
+        } else {
+          header.classList.remove("scrolled");
+        }
+      }, { passive: true });
+
+      // ====== SCROLL-TO-TOP BUTTON ======
+      const scrollTopBtn = document.getElementById("scrollTop");
+      window.addEventListener("scroll", function() {
+        if (window.scrollY > 400) {
+          scrollTopBtn.classList.add("visible");
+        } else {
+          scrollTopBtn.classList.remove("visible");
+        }
+      }, { passive: true });
+
+      // ====== INTERSECTION OBSERVER (Scroll Reveal) ======
+      const revealElements = document.querySelectorAll(".reveal");
+      const revealObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.08,
+        rootMargin: "0px 0px -40px 0px"
+      });
+      revealElements.forEach(function(el) {
+        revealObserver.observe(el);
+      });
+
+      // ====== SMOOTH ANCHOR SCROLLING ======
+      document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+        anchor.addEventListener("click", function(e) {
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        });
+      });
     </script>
   </body>
 </html>
-
