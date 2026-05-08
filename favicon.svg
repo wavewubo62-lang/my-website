@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Bob Wu">
+  <rect width="64" height="64" rx="16" fill="#fdfcfb"/>
+  <path d="M18 42V18h10c5 0 8 3 8 7 0 3-2 5-4 6 4 1 7 4 7 8 0 5-4 8-10 8H18Zm7-14h3c2 0 4-1 4-3s-2-3-4-3h-3v6Zm0 14h4c3 0 5-1 5-4 0-2-2-4-5-4h-4v8Z" fill="#1a1a1a"/>
+  <path d="M39 18h6l4 17 4-17h6l-7 24h-6l-4-15-4 15h-6l-3-10h6l2 6 4-20Z" fill="#2f8f63"/>
+</svg>
