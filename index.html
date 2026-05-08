@@ -6,8 +6,29 @@
     <meta name="color-scheme" content="dark light" />
     <meta
       name="description"
-      content="A high-end personal branding landing page for a Dublin-based Cordon Bleu Chef and 3D Tech Entrepreneur."
+      content="Bob Wu is a Dublin-based Le Cordon Bleu-trained chef and 3D tech entrepreneur working across private dining, prototyping, and product storytelling."
     />
+    <meta name="theme-color" content="#2f8f63" />
+    <meta name="author" content="Bob Wu" />
+    <link rel="canonical" href="https://bobwu123.cn/" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Bob Wu" />
+    <meta property="og:title" content="Bob Wu | Chef × 3D Tech Entrepreneur — Dublin" />
+    <meta
+      property="og:description"
+      content="Dublin-based culinary craft, 3D prototyping, and product storytelling by Bob Wu."
+    />
+    <meta property="og:url" content="https://bobwu123.cn/" />
+    <meta property="og:image" content="https://bobwu123.cn/IMG_9192.jpg" />
+    <meta property="og:image:alt" content="Portrait of Bob Wu" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Bob Wu | Chef × 3D Tech Entrepreneur — Dublin" />
+    <meta
+      name="twitter:description"
+      content="Dublin-based culinary craft, 3D prototyping, and product storytelling by Bob Wu."
+    />
+    <meta name="twitter:image" content="https://bobwu123.cn/IMG_9192.jpg" />
     <title>Bob Wu | Chef × 3D Tech Entrepreneur — Dublin</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -16,6 +37,26 @@
       href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,200..900&family=Inter:wght@300..800&display=swap"
       rel="stylesheet"
     />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Bob Wu",
+        "url": "https://bobwu123.cn/",
+        "image": "https://bobwu123.cn/IMG_9192.jpg",
+        "jobTitle": "Chef and 3D Tech Entrepreneur",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Dublin",
+          "addressCountry": "IE"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/in/bo-wu-7754033b8",
+          "https://www.instagram.com/bowu95"
+        ],
+        "email": "mailto:wavewubo@hotmail.com"
+      }
+    </script>
     <style>
       /* ========================================
          CSS VARIABLES & THEME
@@ -1174,8 +1215,8 @@
               </div>
               <div class="body">
                 <div class="kicker"><i aria-hidden="true"></i> Tasting menu</div>
-                <h3>[Dish / Course Title]</h3>
-                <p>A short story about flavour and intent — seasonal, balanced, and quietly confident.</p>
+                <h3>Seasonal tasting course</h3>
+                <p>A concise study in flavour and intent — balanced, detailed, and quietly confident.</p>
                 <div class="chips" aria-label="Tags">
                   <span class="chip">Seasonal</span>
                   <span class="chip">Modern Irish</span>
@@ -1190,7 +1231,7 @@
               </div>
               <div class="body">
                 <div class="kicker"><i class="gold" aria-hidden="true"></i> Pâtisserie</div>
-                <h3>[Dessert / Pastry Title]</h3>
+                <h3>Precision pâtisserie study</h3>
                 <p>Precision textures, clean sweetness, and a finish that feels like a proper treat.</p>
                 <div class="chips" aria-label="Tags">
                   <span class="chip">Chocolate</span>
@@ -1206,7 +1247,7 @@
               </div>
               <div class="body">
                 <div class="kicker"><i aria-hidden="true"></i> Experience</div>
-                <h3>[Event / Collaboration]</h3>
+                <h3>Private dining and brand service</h3>
                 <p>A calm, polished service — built around your guests, your brand, and the moment you're after.</p>
                 <div class="chips" aria-label="Tags">
                   <span class="chip">Private dining</span>
@@ -1282,7 +1323,7 @@
               </div>
               <div class="body">
                 <div class="kicker"><i class="gold" aria-hidden="true"></i> Prototype</div>
-                <h3>[Project Name]</h3>
+                <h3>Complex-form prototype</h3>
                 <p>A clean first pass built fast — optimised for iteration, testing, and proper stakeholder buy-in.</p>
                 <div class="chips" aria-label="Tags">
                   <span class="chip">Rapid iteration</span>
@@ -1298,7 +1339,7 @@
               </div>
               <div class="body">
                 <div class="kicker"><i aria-hidden="true"></i> Engineering</div>
-                <h3>[Functional Print]</h3>
+                <h3>Functional tolerance study</h3>
                 <p>Designed for real-world use — tolerances, materials, and constraints considered from day one.</p>
                 <div class="chips" aria-label="Tags">
                   <span class="chip">Tolerance</span>
@@ -1314,7 +1355,7 @@
               </div>
               <div class="body">
                 <div class="kicker"><i class="gold" aria-hidden="true"></i> Storytelling</div>
-                <h3>[Brand Object / Concept]</h3>
+                <h3>Presentation-ready brand object</h3>
                 <p>A tactile artefact that makes your idea feel obvious — refined enough to sit on a boardroom table.</p>
                 <div class="chips" aria-label="Tags">
                   <span class="chip">Premium</span>
@@ -1417,22 +1458,21 @@
             <div class="panel reveal">
               <h3>Tell me what you're after</h3>
               <p class="fineprint">
-                This form is a placeholder (no backend yet). Replace the action with your email service or a form
-                provider when you're ready.
+                Share the essentials and your email app will open with the details ready to send.
               </p>
 
-              <form class="fields" action="#" method="post">
+              <form class="fields" id="enquiryForm">
                 <div class="field">
                   <label for="name">Name</label>
-                  <input id="name" name="name" type="text" placeholder="Your name" autocomplete="name" />
+                  <input id="name" name="name" type="text" placeholder="Your name" autocomplete="name" required />
                 </div>
                 <div class="field">
                   <label for="email">Email</label>
-                  <input id="email" name="email" type="email" placeholder="you@example.com" autocomplete="email" />
+                  <input id="email" name="email" type="email" placeholder="you@example.com" autocomplete="email" required />
                 </div>
                 <div class="field">
                   <label for="type">What do you need?</label>
-                  <input id="type" name="type" type="text" placeholder="Private dining, brand collab, prototype, product demo…" autocomplete="off" />
+                  <input id="type" name="type" type="text" placeholder="Private dining, brand collab, prototype, product demo…" autocomplete="off" required />
                 </div>
                 <div class="field">
                   <label for="msg">Notes</label>
@@ -1561,6 +1601,30 @@
           }
         });
       });
+
+      // ====== ENQUIRY FORM MAILTO FALLBACK ======
+      const enquiryForm = document.getElementById("enquiryForm");
+      if (enquiryForm) {
+        enquiryForm.addEventListener("submit", function(e) {
+          e.preventDefault();
+
+          const formData = new FormData(enquiryForm);
+          const name = String(formData.get("name") || "").trim();
+          const email = String(formData.get("email") || "").trim();
+          const type = String(formData.get("type") || "").trim();
+          const message = String(formData.get("message") || "").trim();
+
+          const subject = encodeURIComponent("Website enquiry from " + (name || "a visitor"));
+          const body = encodeURIComponent(
+            "Name: " + name + "\n" +
+            "Email: " + email + "\n" +
+            "Enquiry type: " + type + "\n\n" +
+            "Notes:\n" + message
+          );
+
+          window.location.href = "mailto:wavewubo@hotmail.com?subject=" + subject + "&body=" + body;
+        });
+      }
     </script>
   </body>
 </html>
